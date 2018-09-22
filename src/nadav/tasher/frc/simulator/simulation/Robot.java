@@ -50,4 +50,7 @@ public class Robot extends Nameable {
     public void setColor(Color color) {
         this.color = color;
     }
+
+    public static class Motor {
+    }
 }

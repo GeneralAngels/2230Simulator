@@ -4,7 +4,7 @@ public class Nameable {
     private String name = "Unnamed";
 
     public Nameable() {
-        name = getClass().getName();
+        name = getClass().getSimpleName();
     }
 
     public Nameable(String name) {
