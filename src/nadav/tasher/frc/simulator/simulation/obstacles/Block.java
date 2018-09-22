@@ -1,6 +1,6 @@
 package nadav.tasher.frc.simulator.simulation.obstacles;
 
-import nadav.tasher.frc.simulator.simulation.Obstacle;
+import nadav.tasher.frc.simulator.simulation.entities.Obstacle;
 
 public class Block extends Obstacle {
     public Block() {

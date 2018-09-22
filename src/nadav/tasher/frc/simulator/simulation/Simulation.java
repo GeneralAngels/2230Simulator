@@ -9,7 +9,6 @@ import java.util.TimerTask;
 
 public class Simulation {
     private int refreshRate = 30;
-    private Robot robot;
     private Mat mat;
 
     private Tower<Component> stateTower = new Tower<>();
