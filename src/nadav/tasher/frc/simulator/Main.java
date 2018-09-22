@@ -1,7 +1,5 @@
 package nadav.tasher.frc.simulator;
 
-import nadav.tasher.frc.simulator.simulation.SimulationGUI;
-
 import javax.swing.*;
 
 public class Main {

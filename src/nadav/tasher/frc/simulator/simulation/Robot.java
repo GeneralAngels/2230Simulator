@@ -1,8 +1,8 @@
-package nadav.tasher.frc.simulator.simulation.robot;
+package nadav.tasher.frc.simulator.simulation;
 
 import java.awt.*;
 
-public class Robot {
+public class Robot extends Nameable {
 
     /*
     Mass is in KG,
@@ -11,15 +11,6 @@ public class Robot {
     private int sizeX = 1, sizeY = 1, sizeZ = 1, mass = 10;
     private double angle = 0.0;
     private Color color;
-    private String name;
-
-    public Robot() {
-        name = getClass().getName();
-    }
-
-    public String getName() {
-        return name;
-    }
 
     public int getSizeX() {
         return sizeX;
@@ -38,7 +29,7 @@ public class Robot {
     }
 
     /*
-    For changing mass robot (that pick up things)
+    For changing mass robot (that picks up things)
      */
     public void setMass(int mass) {
         this.mass = mass;

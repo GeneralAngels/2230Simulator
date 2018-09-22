@@ -1,8 +1,7 @@
-package nadav.tasher.frc.simulator.simulation.simulation;
+package nadav.tasher.frc.simulator.simulation;
 
 import nadav.tasher.frc.simulator.parts.Tower;
 import nadav.tasher.frc.simulator.parts.Tube;
-import nadav.tasher.frc.simulator.simulation.robot.Robot;
 import net.java.games.input.*;
 
 import java.util.Timer;

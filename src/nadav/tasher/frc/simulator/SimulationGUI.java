@@ -1,6 +1,6 @@
-package nadav.tasher.frc.simulator.simulation;
+package nadav.tasher.frc.simulator;
 
-import nadav.tasher.frc.simulator.simulation.simulation.Simulation;
+import nadav.tasher.frc.simulator.simulation.Simulation;
 
 import javax.swing.*;
 import java.awt.*;

@@ -1,13 +1,11 @@
-package nadav.tasher.frc.simulator.simulation.simulation;
-
-import nadav.tasher.frc.simulator.simulation.robot.Robot;
+package nadav.tasher.frc.simulator.simulation;
 
 import java.awt.*;
 import java.util.ArrayList;
 
 public class Mat {
     private int sizeX = 100, sizeY = 100;
-    private ArrayList<Obstacle> obstacle = new ArrayList<>();
+    private ArrayList<Obstacle> obstacles = new ArrayList<>();
     private ArrayList<Robot> robots = new ArrayList<>();
 
     public Mat() {
@@ -20,6 +18,10 @@ public class Mat {
 
     public void addRobot(Robot robot) {
         robots.add(robot);
+    }
+
+    public void addObstacle(Obstacle obstacle) {
+        obstacles.add(obstacle);
     }
 
     public void draw(Canvas canvas) {
