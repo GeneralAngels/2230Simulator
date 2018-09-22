@@ -1,18 +1,16 @@
 package nadav.tasher.frc.simulator.simulation;
 
-import nadav.tasher.frc.simulator.parts.Tower;
-import nadav.tasher.frc.simulator.parts.Tube;
-import net.java.games.input.*;
+import nadav.tasher.frc.simulator.simulation.robots.types.DynamicRobot;
+import net.java.games.input.Component;
+import net.java.games.input.Controller;
+import net.java.games.input.ControllerEnvironment;
 
 import java.util.Timer;
 import java.util.TimerTask;
 
 public class Simulation {
-    private int refreshRate = 30;
-    private Mat mat;
-
-    private Tower<Component> stateTower = new Tower<>();
-    private Tube<Component> stateTube = new Tube<>();
+    private int refreshRate = 20;
+    private Mat mat = new Mat();
 
     public Simulation(int refreshRate) {
         this.refreshRate = refreshRate;
@@ -32,16 +30,15 @@ public class Simulation {
         }, 0, 1000 / refreshRate);
     }
 
+    public Mat getMat() {
+        return mat;
+    }
+
     private void handleInputs() {
-        Event event = new Event();
-        Controller[] controllers = ControllerEnvironment.getDefaultEnvironment().getControllers();
-        for (int i = 0; i < controllers.length; i++) {
-            controllers[i].poll();
-            EventQueue queue = controllers[i].getEventQueue();
-            while (queue.getNextEvent(event)) {
-                Component comp = event.getComponent();
-                stateTower.tell(comp);
-                stateTube.blow(comp);
+        for (Controller controller : ControllerEnvironment.getDefaultEnvironment().getControllers()) {
+            controller.poll();
+            for (Component component : controller.getComponents()) {
+                for (DynamicRobot r : mat.getRobots()) r.handleComponent(component);
             }
         }
     }

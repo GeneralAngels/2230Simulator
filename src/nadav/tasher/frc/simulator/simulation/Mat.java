@@ -1,6 +1,7 @@
 package nadav.tasher.frc.simulator.simulation;
 
 import nadav.tasher.frc.simulator.simulation.entities.Obstacle;
+import nadav.tasher.frc.simulator.simulation.entities.Robot;
 import nadav.tasher.frc.simulator.simulation.robots.types.DynamicRobot;
 
 import java.awt.*;
@@ -27,7 +28,12 @@ public class Mat {
         obstacles.add(obstacle);
     }
 
-    public void draw(Canvas canvas) {
+    public void draw(Graphics graphics) {
+        // Draw Mat
+        for (Robot r : robots) {
+            graphics.setColor(r.getColor());
+//            graphics.drawLine();
+        }
     }
 
     public ArrayList<DynamicRobot> getRobots() {
