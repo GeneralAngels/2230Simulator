@@ -1,4 +1,4 @@
-package nadav.tasher.frc.simulator.simulation.robots;
+package nadav.tasher.frc.simulator.simulation.robot.robots;
 
 import nadav.tasher.frc.simulator.simulation.challenges.ChallengeRobot2018;
 

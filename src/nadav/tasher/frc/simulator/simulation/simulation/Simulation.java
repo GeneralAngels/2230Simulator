@@ -1,7 +1,8 @@
-package nadav.tasher.frc.simulator.simulation;
+package nadav.tasher.frc.simulator.simulation.simulation;
 
 import nadav.tasher.frc.simulator.parts.Tower;
 import nadav.tasher.frc.simulator.parts.Tube;
+import nadav.tasher.frc.simulator.simulation.robot.Robot;
 import net.java.games.input.*;
 
 import java.util.Timer;
@@ -9,7 +10,9 @@ import java.util.TimerTask;
 
 public class Simulation {
     private int refreshRate = 30;
-    private Timer inputRefresher;
+    private Robot robot;
+    private Mat mat;
+
     private Tower<Component> stateTower = new Tower<>();
     private Tube<Component> stateTube = new Tube<>();
 
@@ -23,8 +26,7 @@ public class Simulation {
     }
 
     private void init() {
-        inputRefresher = new Timer();
-        inputRefresher.scheduleAtFixedRate(new TimerTask() {
+        new Timer().scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
                 handleInputs();
