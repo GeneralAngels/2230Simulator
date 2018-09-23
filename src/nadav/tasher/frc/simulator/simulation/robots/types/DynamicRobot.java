@@ -16,14 +16,15 @@ public class DynamicRobot extends Robot {
     }
 
     public void handleComponent(Component component, Mat mat) {
-        float value = component.getPollData();
+        double value = component.getPollData();
         if (component.getName().equals("x")) {
-            setAngle(bound(getAngle() + value / 10));
+            setAngle(bound(getAngle() + value / 1000));
         } else if (component.getName().equals("y")) {
             Mat.Coordinates current = getMatCoordinates();
             // Thing To Move Robot In Angle
-            int x = (int) (current.getX() + value * 10 * Math.cos(getAngle() * 180));
-            int y = (int) (current.getY() + value * 10 * Math.sin(getAngle() * 180));
+            int x = (int) ((double) current.getX() + value * Math.cos(180 - getAngle() * 360));
+            int y = (int) ((double) current.getY() + value * Math.sin(180 - getAngle() * 360));
+            System.out.println("X,Y Togo " + value * Math.cos(180 - getAngle() * 360) + "," + value * Math.sin(180 - getAngle() * 360));
             setMatCoordinates(bound(new Mat.Coordinates(x, y), mat));
         } else if (component.getName().equals("z")) {
         }
@@ -33,6 +34,7 @@ public class DynamicRobot extends Robot {
 //        if(value<-1)return bound(2+value);
 //        if(value>1)return bound(value-2);
         if (value > 1) return bound(value - 1);
+        if (value < 0) return bound(value + 1);
         return value;
     }
 
@@ -44,5 +46,9 @@ public class DynamicRobot extends Robot {
         y = (y >= 0) ? y : 0;
         y = (y <= mat.getSizeY()) ? y : mat.getSizeY();
         return new Mat.Coordinates(x, y);
+    }
+
+    private int direction(double angle) {
+        return (angle > 180) ? 1 : -1;
     }
 }

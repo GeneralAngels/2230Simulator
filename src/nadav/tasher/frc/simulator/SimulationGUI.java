@@ -3,6 +3,9 @@ package nadav.tasher.frc.simulator;
 import nadav.tasher.frc.simulator.simulation.Simulation;
 import nadav.tasher.frc.simulator.simulation.entities.Robot;
 import nadav.tasher.frc.simulator.simulation.robots.Drako;
+import net.java.games.input.Component;
+import net.java.games.input.Controller;
+import net.java.games.input.ControllerEnvironment;
 
 import javax.swing.*;
 import java.awt.*;
@@ -38,16 +41,21 @@ public class SimulationGUI extends JPanel {
                 StringBuilder stringBuilder = new StringBuilder();
                 for (Robot robot : currentSimulation.getMat().getRobots()) {
                     stringBuilder.append(robot.getName());
-                    stringBuilder.append("\n");
+                    stringBuilder.append("<br/>");
                     stringBuilder.append("X ");
                     stringBuilder.append(robot.getMatCoordinates().getX());
-                    stringBuilder.append("\n");
+                    stringBuilder.append("<br/>");
                     stringBuilder.append("Y ");
                     stringBuilder.append(robot.getMatCoordinates().getY());
-                    stringBuilder.append("\n");
+                    stringBuilder.append("<br/>");
                     stringBuilder.append("α ");
                     stringBuilder.append((float) robot.getAngle() * 360);
-                    stringBuilder.append("\n");
+                    stringBuilder.append("<br/>");
+                }
+                for (Controller controller : ControllerEnvironment.getDefaultEnvironment().getControllers()) {
+                    for (Component component : controller.getComponents())
+                        if (component.getName().replaceAll("x|y|z", "").isEmpty())
+                            stringBuilder.append(component.getName() + " " + component.getPollData() + "<br/>");
                 }
                 info.setText(stringBuilder.toString());
             }

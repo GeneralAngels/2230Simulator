@@ -10,7 +10,7 @@ import java.util.TimerTask;
 
 public class Simulation {
     public static int SECOND = 1000;
-    private int refreshRate = 60;
+    private int refreshRate = 20;
     private Mat mat = new Mat();
     private Timer simulationTimer = new Timer();
 

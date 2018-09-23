@@ -6,7 +6,7 @@ import java.awt.geom.Path2D;
 
 public class Entity extends Nameable {
     private double sizeX = 1, sizeY = 1, sizeZ = 1, mass = 10;
-    private double angle = 0.0;
+    private double angle = 0;
     private Mat.Coordinates matCoordinates = new Mat.Coordinates(0, 0);
     private Color color = Color.WHITE;
 
@@ -72,8 +72,8 @@ public class Entity extends Nameable {
         Coordinates actualSize = matToPixels(graphics, mat, new Mat.Coordinates((int) (sizeX * 10), (int) (sizeY * 10)));
 //        System.out.println(getName()+ " PXCORD:"+gfxCoordinates.getX()+","+gfxCoordinates.getY()+" PXSZ: "+actualSize.getX()+","+actualSize.getY());
         Rectangle entity = new Rectangle(
-                coordinates.getX() - actualSize.getX() / 2,
-                coordinates.getY() - actualSize.getY() / 2,
+                coordinates.getX(),
+                coordinates.getY(),
                 actualSize.getX(),
                 actualSize.getY()
         );
