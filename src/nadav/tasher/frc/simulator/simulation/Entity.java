@@ -3,40 +3,40 @@ package nadav.tasher.frc.simulator.simulation;
 import java.awt.*;
 
 public class Entity extends Nameable {
-    private int sizeX = 1, sizeY = 1, sizeZ = 1, mass = 10;
+    private double sizeX = 1, sizeY = 1, sizeZ = 1, mass = 10;
     private double angle = 0.0;
     private Mat.Coordinates matCoordinates = new Mat.Coordinates(0, 0);
-    private Color color;
+    private Color color = Color.WHITE;
 
-    public int getSizeX() {
+    public double getSizeX() {
         return sizeX;
     }
 
-    protected void setSizeX(int sizeX) {
+    protected void setSizeX(double sizeX) {
         this.sizeX = sizeX;
     }
 
-    public int getSizeZ() {
+    public double getSizeZ() {
         return sizeZ;
     }
 
-    protected void setSizeZ(int sizeZ) {
+    protected void setSizeZ(double sizeZ) {
         this.sizeZ = sizeZ;
     }
 
-    public int getSizeY() {
+    public double getSizeY() {
         return sizeY;
     }
 
-    protected void setSizeY(int sizeY) {
+    protected void setSizeY(double sizeY) {
         this.sizeY = sizeY;
     }
 
-    public int getMass() {
+    public double getMass() {
         return mass;
     }
 
-    protected void setMass(int mass) {
+    protected void setMass(double mass) {
         this.mass = mass;
     }
 
@@ -62,5 +62,33 @@ public class Entity extends Nameable {
 
     protected void setColor(Color color) {
         this.color = color;
+    }
+
+    public void draw(Graphics2D graphics, Mat mat) {
+        graphics.setColor(color);
+        Coordinates gfxCoordinates = coordinatesToPixels(graphics, mat, matCoordinates);
+        Coordinates actualSize = coordinatesToPixels(graphics, mat, new Mat.Coordinates((int) (sizeX * 10), (int) (sizeY * 10)));
+        Rectangle entity = new Rectangle(
+                gfxCoordinates.getX() - actualSize.getX() / 2,
+                gfxCoordinates.getY() - actualSize.getY() / 2,
+                actualSize.getX(),
+                actualSize.getY()
+        );
+        graphics.rotate(Math.toDegrees(angle * 360));
+        graphics.draw(entity);
+        graphics.fill(entity);
+    }
+
+    private Coordinates coordinatesToPixels(Graphics2D graphics, Mat mat, Mat.Coordinates coordinates) {
+        int gX = graphics.getClipBounds().x;
+        int gY = graphics.getClipBounds().y;
+        int mX = mat.getSizeX();
+        int mY = mat.getSizeY();
+        int cX = coordinates.getX();
+        int cY = coordinates.getY();
+        int rX, rY;
+        rX = (gX / mX) * cX;
+        rY = (gY / mY) * cY;
+        return new Coordinates(rX, rY);
     }
 }

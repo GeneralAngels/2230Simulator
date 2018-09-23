@@ -30,30 +30,27 @@ public class Mat {
 
     public void draw(Graphics graphics) {
         // Draw Mat
+        Graphics2D graphics2d = (Graphics2D) graphics;
         for (Robot r : robots) {
-            graphics.setColor(r.getColor());
-//            graphics.drawLine();
+            r.draw(graphics2d, this);
         }
+    }
+
+    public int getSizeX() {
+        return sizeX;
+    }
+
+    public int getSizeY() {
+        return sizeY;
     }
 
     public ArrayList<DynamicRobot> getRobots() {
         return robots;
     }
 
-    public static class Coordinates {
-        private int x, y;
-
+    public static class Coordinates extends nadav.tasher.frc.simulator.simulation.Coordinates {
         public Coordinates(int x, int y) {
-            this.x = x;
-            this.y = y;
-        }
-
-        public int getX() {
-            return x;
-        }
-
-        public int getY() {
-            return y;
+            super(x, y);
         }
     }
 }

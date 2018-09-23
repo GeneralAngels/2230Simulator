@@ -9,8 +9,10 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class Simulation {
+    public static int SECOND = 1000;
     private int refreshRate = 20;
     private Mat mat = new Mat();
+    private Timer simulationTimer = new Timer();
 
     public Simulation(int refreshRate) {
         this.refreshRate = refreshRate;
@@ -22,12 +24,12 @@ public class Simulation {
     }
 
     private void init() {
-        new Timer().scheduleAtFixedRate(new TimerTask() {
+        simulationTimer.scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
                 handleInputs();
             }
-        }, 0, 1000 / refreshRate);
+        }, 0, SECOND / refreshRate);
     }
 
     public Mat getMat() {
