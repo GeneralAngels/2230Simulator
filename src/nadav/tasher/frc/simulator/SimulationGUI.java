@@ -11,6 +11,7 @@ import java.util.TimerTask;
 public class SimulationGUI extends JPanel {
     private Simulation currentSimulation;
     private Timer screenTimer = new Timer();
+    private static final int SCREEN_REFRESH_RATE = 60;
 
     public SimulationGUI() {
         init();
@@ -23,9 +24,10 @@ public class SimulationGUI extends JPanel {
         screenTimer.scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
+//                updateUI();
                 repaint();
             }
-        }, 0, 1000);
+        }, 0, 1000 / SCREEN_REFRESH_RATE);
     }
 
     @Override

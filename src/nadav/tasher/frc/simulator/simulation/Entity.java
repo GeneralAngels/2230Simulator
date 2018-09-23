@@ -1,6 +1,8 @@
 package nadav.tasher.frc.simulator.simulation;
 
 import java.awt.*;
+import java.awt.geom.AffineTransform;
+import java.awt.geom.Path2D;
 
 public class Entity extends Nameable {
     private double sizeX = 1, sizeY = 1, sizeZ = 1, mass = 10;
@@ -66,22 +68,28 @@ public class Entity extends Nameable {
 
     public void draw(Graphics2D graphics, Mat mat) {
         graphics.setColor(color);
-        Coordinates gfxCoordinates = coordinatesToPixels(graphics, mat, matCoordinates);
-        Coordinates actualSize = coordinatesToPixels(graphics, mat, new Mat.Coordinates((int) (sizeX * 10), (int) (sizeY * 10)));
+        Coordinates coordinates = matToPixels(graphics, mat, matCoordinates);
+        Coordinates actualSize = matToPixels(graphics, mat, new Mat.Coordinates((int) (sizeX * 10), (int) (sizeY * 10)));
+//        System.out.println(getName()+ " PXCORD:"+gfxCoordinates.getX()+","+gfxCoordinates.getY()+" PXSZ: "+actualSize.getX()+","+actualSize.getY());
         Rectangle entity = new Rectangle(
-                gfxCoordinates.getX() - actualSize.getX() / 2,
-                gfxCoordinates.getY() - actualSize.getY() / 2,
+                coordinates.getX() - actualSize.getX() / 2,
+                coordinates.getY() - actualSize.getY() / 2,
                 actualSize.getX(),
                 actualSize.getY()
         );
-        graphics.rotate(Math.toDegrees(angle * 360));
-        graphics.draw(entity);
-        graphics.fill(entity);
+        Path2D.Double path = new Path2D.Double();
+        path.append(entity, false);
+        AffineTransform transform = new AffineTransform();
+        transform.rotate(Math.toRadians(angle * 360), entity.getX() + entity.getWidth() / 2, entity.getY() + entity.getHeight() / 2);
+        path.transform(transform);
+        graphics.draw(path);
+        graphics.draw(path);
+        graphics.fill(path);
     }
 
-    private Coordinates coordinatesToPixels(Graphics2D graphics, Mat mat, Mat.Coordinates coordinates) {
-        int gX = graphics.getClipBounds().x;
-        int gY = graphics.getClipBounds().y;
+    private Coordinates matToPixels(Graphics2D graphics, Mat mat, Mat.Coordinates coordinates) {
+        int gX = (int) graphics.getClip().getBounds().getWidth();
+        int gY = (int) graphics.getClip().getBounds().getHeight();
         int mX = mat.getSizeX();
         int mY = mat.getSizeY();
         int cX = coordinates.getX();

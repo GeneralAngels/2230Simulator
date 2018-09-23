@@ -16,5 +16,6 @@ public class Drako extends ChallengeRobot2018 {
     @Override
     public void handleComponent(Component component) {
         super.handleComponent(component);
+//        System.out.println("Angle "+getAngle());
     }
 }
