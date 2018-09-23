@@ -83,7 +83,6 @@ public class Entity extends Nameable {
         transform.rotate(Math.toRadians(angle * 360), entity.getX() + entity.getWidth() / 2, entity.getY() + entity.getHeight() / 2);
         path.transform(transform);
         graphics.draw(path);
-        graphics.draw(path);
         graphics.fill(path);
     }
 

@@ -14,8 +14,10 @@ public class Drako extends ChallengeRobot2018 {
     }
 
     @Override
-    public void handleComponent(Component component) {
-        super.handleComponent(component);
+    public void handleComponent(Component component, Mat mat) {
+        super.handleComponent(component, mat);
+        if (component.getName().equals("Trigger") && component.getPollData() == 1)
+            setMatCoordinates(new Mat.Coordinates(20, 20));
 //        System.out.println("Angle "+getAngle());
     }
 }

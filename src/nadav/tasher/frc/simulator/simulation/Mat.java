@@ -29,9 +29,6 @@ public class Mat {
     }
 
     public void draw(Graphics graphics) {
-        // Draw Mat
-//        BufferedImage bufferImage = new BufferedImage((int)graphics.getClip().getBounds().getWidth(),(int)graphics.getClip().getBounds().getHeight(),BufferedImage.TYPE_INT_RGB);
-
         Graphics2D graphics2d = (Graphics2D) graphics;
         graphics2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         graphics2d.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_SPEED);
@@ -41,8 +38,6 @@ public class Mat {
         for (Obstacle o : obstacles) {
             o.draw(graphics2d, this);
         }
-//        graphics.drawImage(bufferImage,0,0,null);
-
     }
 
     public int getSizeX() {

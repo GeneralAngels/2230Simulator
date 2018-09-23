@@ -10,7 +10,7 @@ import java.util.TimerTask;
 
 public class Simulation {
     public static int SECOND = 1000;
-    private int refreshRate = 10;
+    private int refreshRate = 60;
     private Mat mat = new Mat();
     private Timer simulationTimer = new Timer();
 
@@ -40,7 +40,7 @@ public class Simulation {
         for (Controller controller : ControllerEnvironment.getDefaultEnvironment().getControllers()) {
             controller.poll();
             for (Component component : controller.getComponents()) {
-                for (DynamicRobot r : mat.getRobots()) r.handleComponent(component);
+                for (DynamicRobot r : mat.getRobots()) r.handleComponent(component, mat);
             }
         }
     }
