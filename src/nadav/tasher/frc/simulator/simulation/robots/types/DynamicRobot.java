@@ -5,6 +5,7 @@ import nadav.tasher.frc.simulator.simulation.entities.Robot;
 import net.java.games.input.Component;
 
 public class DynamicRobot extends Robot {
+    private double speed = 0;
     private Motor[] motors = new Motor[0];
 
     public Motor[] getMotors() {
@@ -18,17 +19,21 @@ public class DynamicRobot extends Robot {
     public void handleComponent(Component component, Mat mat) {
         double value = component.getPollData();
         if (component.getName().equals("x")) {
-            setAngle(bound(getAngle() + value / 1000));
+            setAngle(bound(getAngle() + value / 100));
         } else if (component.getName().equals("y")) {
+            speed = -value / 10;
             if (value != 0) {
                 Mat.Coordinates current = getMatCoordinates();
-                // Thing To Move Robot In Angle
-                double x = (current.getX() + value * Math.cos(Math.toRadians(getAngle() * 360)));
-                double y = (current.getY() + value * Math.sin(Math.toRadians(getAngle() * 360)));
+                double x = (current.getX() + speed * Math.cos(Math.toRadians(getAngle() * 360)));
+                double y = (current.getY() + speed * Math.sin(Math.toRadians(getAngle() * 360)));
                 setMatCoordinates(bound(new Mat.Coordinates(x, y), mat));
             }
         } else if (component.getName().equals("z")) {
         }
+    }
+
+    public double getSpeed() {
+        return speed;
     }
 
     private double bound(double value) {
@@ -47,9 +52,5 @@ public class DynamicRobot extends Robot {
         y = (y >= 0) ? y : 0;
         y = (y <= mat.getSizeY()) ? y : mat.getSizeY();
         return new Mat.Coordinates(x, y);
-    }
-
-    private int direction(double angle) {
-        return (angle > 180) ? 1 : -1;
     }
 }

@@ -69,7 +69,7 @@ public class Entity extends Nameable {
     public void draw(Graphics2D graphics, Mat mat) {
         graphics.setColor(color);
         Coordinates coordinates = matToPixels(graphics, mat, matCoordinates);
-        Coordinates actualSize = matToPixels(graphics, mat, new Mat.Coordinates((int) (sizeX * 10), (int) (sizeY * 10)));
+        Coordinates actualSize = matToPixels(graphics, mat, new Mat.Coordinates((int) (sizeX), (int) (sizeY)));
 //        System.out.println(getName()+ " PXCORD:"+gfxCoordinates.getX()+","+gfxCoordinates.getY()+" PXSZ: "+actualSize.getX()+","+actualSize.getY());
         Rectangle entity = new Rectangle(
                 (int) coordinates.getX(),

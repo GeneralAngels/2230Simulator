@@ -1,8 +1,9 @@
 package nadav.tasher.frc.simulator;
 
 import nadav.tasher.frc.simulator.simulation.Simulation;
-import nadav.tasher.frc.simulator.simulation.entities.Robot;
+import nadav.tasher.frc.simulator.simulation.challenges.Challenge2018;
 import nadav.tasher.frc.simulator.simulation.robots.Drako;
+import nadav.tasher.frc.simulator.simulation.robots.types.DynamicRobot;
 import net.java.games.input.Component;
 import net.java.games.input.Controller;
 import net.java.games.input.ControllerEnvironment;
@@ -15,6 +16,7 @@ import java.util.TimerTask;
 import static nadav.tasher.frc.simulator.Utils.y;
 
 public class SimulationGUI extends JPanel {
+    private static final int simulationRate = 60;
     private Simulation currentSimulation;
     private SimulationView simulationView;
     private TextView info = new TextView();
@@ -26,7 +28,7 @@ public class SimulationGUI extends JPanel {
 
     private void init() {
         setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
-        currentSimulation = new Simulation();
+        currentSimulation = new Simulation(new Challenge2018.Mat(), simulationRate);
         currentSimulation.getMat().addRobot(new Drako());
         simulationView = new SimulationView(new Dimension(y(), y()), currentSimulation, 30);
         add(simulationView);
@@ -39,8 +41,12 @@ public class SimulationGUI extends JPanel {
             @Override
             public void run() {
                 StringBuilder stringBuilder = new StringBuilder();
-                for (Robot robot : currentSimulation.getMat().getRobots()) {
+                for (DynamicRobot robot : currentSimulation.getMat().getRobots()) {
                     stringBuilder.append(robot.getName());
+                    stringBuilder.append("<br/>");
+                    stringBuilder.append("V ");
+                    stringBuilder.append((int) (robot.getSpeed() * simulationRate));
+                    stringBuilder.append("M/s");
                     stringBuilder.append("<br/>");
                     stringBuilder.append("X ");
                     stringBuilder.append(robot.getMatCoordinates().getX());

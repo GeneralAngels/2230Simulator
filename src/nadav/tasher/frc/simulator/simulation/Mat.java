@@ -15,7 +15,7 @@ public class Mat {
     public Mat() {
     }
 
-    public Mat(int sizeX, int sizeY) {
+    protected Mat(int sizeX, int sizeY) {
         this.sizeX = sizeX;
         this.sizeY = sizeY;
     }
@@ -50,6 +50,10 @@ public class Mat {
 
     public ArrayList<DynamicRobot> getRobots() {
         return robots;
+    }
+
+    public ArrayList<Obstacle> getObstacles() {
+        return obstacles;
     }
 
     public static class Coordinates extends nadav.tasher.frc.simulator.simulation.Coordinates {

@@ -10,12 +10,23 @@ import java.util.TimerTask;
 
 public class Simulation {
     public static int SECOND = 1000;
-    private int refreshRate = 20;
+    private int simulationRate = 30;
     private Mat mat = new Mat();
     private Timer simulationTimer = new Timer();
 
-    public Simulation(int refreshRate) {
-        this.refreshRate = refreshRate;
+    public Simulation(Mat mat, int simulationRate) {
+        this.simulationRate = simulationRate;
+        this.mat = mat;
+        init();
+    }
+
+    public Simulation(int simulationRate) {
+        this.simulationRate = simulationRate;
+        init();
+    }
+
+    public Simulation(Mat mat) {
+        this.mat = mat;
         init();
     }
 
@@ -29,7 +40,7 @@ public class Simulation {
             public void run() {
                 handleInputs();
             }
-        }, 0, SECOND / refreshRate);
+        }, 0, SECOND / simulationRate);
     }
 
     public Mat getMat() {
