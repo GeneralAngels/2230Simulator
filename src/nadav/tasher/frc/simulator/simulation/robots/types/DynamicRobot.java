@@ -20,13 +20,13 @@ public class DynamicRobot extends Robot {
         if (component.getName().equals("x")) {
             setAngle(bound(getAngle() + value / 1000));
         } else if (component.getName().equals("y")) {
-            Mat.Coordinates current = getMatCoordinates();
-            // Thing To Move Robot In Angle
-            double x = (current.getX() + value * Math.cos(getAngle() * 360));
-            double y = (current.getY() + value * Math.sin(getAngle() * 360));
-//            System.out.println(value + " " + (x - current.getX()));
-//            System.out.println("X,Y Togo " + value * Math.cos(180 - getAngle() * 360) + "," + value * Math.sin(180 - getAngle() * 360));
-            setMatCoordinates(bound(new Mat.Coordinates(x, y), mat));
+            if (value != 0) {
+                Mat.Coordinates current = getMatCoordinates();
+                // Thing To Move Robot In Angle
+                double x = (current.getX() + value * Math.cos(Math.toRadians(getAngle() * 360)));
+                double y = (current.getY() + value * Math.sin(Math.toRadians(getAngle() * 360)));
+                setMatCoordinates(bound(new Mat.Coordinates(x, y), mat));
+            }
         } else if (component.getName().equals("z")) {
         }
     }
