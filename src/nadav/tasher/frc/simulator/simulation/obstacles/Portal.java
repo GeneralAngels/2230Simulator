@@ -9,7 +9,7 @@ import java.awt.*;
 public class Portal extends Obstacle {
     private Mat.Coordinates teleport;
 
-    public Portal(int sizeX, int sizeY, Mat.Coordinates gate, Mat.Coordinates teleport) {
+    public Portal(double sizeX, double sizeY, Mat.Coordinates gate, Mat.Coordinates teleport) {
         setSizeX(sizeX);
         setSizeY(sizeY);
         setColor(new Color(0, 0, 0, Color.TRANSLUCENT));
@@ -18,7 +18,7 @@ public class Portal extends Obstacle {
     }
 
     @Override
-    protected void setColor(Color color) {
+    public void setColor(Color color) {
         super.setColor(color);
     }
 

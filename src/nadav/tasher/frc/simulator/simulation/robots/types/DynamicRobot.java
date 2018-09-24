@@ -43,14 +43,4 @@ public class DynamicRobot extends Robot {
         if (value < 0) return bound(value + 1);
         return value;
     }
-
-    private Mat.Coordinates bound(Mat.Coordinates coordinates, Mat mat) {
-        double x = coordinates.getX();
-        double y = coordinates.getY();
-        x = (x >= 0) ? x : 0;
-        x = (x <= mat.getSizeX()) ? x : mat.getSizeX();
-        y = (y >= 0) ? y : 0;
-        y = (y <= mat.getSizeY()) ? y : mat.getSizeY();
-        return new Mat.Coordinates(x, y);
-    }
 }

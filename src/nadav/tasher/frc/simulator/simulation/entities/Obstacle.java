@@ -8,6 +8,7 @@ public class Obstacle extends Entity {
      */
     private int breakingForce = 100;
     private boolean isBroken = false;
+//    private voi
 
     public void applyForce(int force) {
         if (force >= breakingForce) isBroken = true;
@@ -19,5 +20,9 @@ public class Obstacle extends Entity {
 
     public boolean isBroken() {
         return isBroken;
+    }
+
+    public void setState(String state) {
+//        this.state=state;
     }
 }

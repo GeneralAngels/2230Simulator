@@ -4,9 +4,6 @@ import nadav.tasher.frc.simulator.simulation.Simulation;
 import nadav.tasher.frc.simulator.simulation.challenges.Challenge2018;
 import nadav.tasher.frc.simulator.simulation.robots.Drako;
 import nadav.tasher.frc.simulator.simulation.robots.types.DynamicRobot;
-import net.java.games.input.Component;
-import net.java.games.input.Controller;
-import net.java.games.input.ControllerEnvironment;
 
 import javax.swing.*;
 import java.awt.*;
@@ -28,9 +25,10 @@ public class SimulationGUI extends JPanel {
 
     private void init() {
         setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
+        setBackground(Color.DARK_GRAY);
         currentSimulation = new Simulation(new Challenge2018.Mat(), simulationRate);
         currentSimulation.getMat().addRobot(new Drako());
-        simulationView = new SimulationView(new Dimension(y(), y()), currentSimulation, 30);
+        simulationView = new SimulationView(new Dimension(y(), y()), currentSimulation, 50);
         add(simulationView);
         add(info);
         initInfoUpdater();
@@ -42,6 +40,7 @@ public class SimulationGUI extends JPanel {
             public void run() {
                 StringBuilder stringBuilder = new StringBuilder();
                 for (DynamicRobot robot : currentSimulation.getMat().getRobots()) {
+                    stringBuilder.append("<p style=\"color: #" + Integer.toHexString(robot.getColor().getRGB()).substring(2) + ";\">");
                     stringBuilder.append(robot.getName());
                     stringBuilder.append("<br/>");
                     stringBuilder.append("V ");
@@ -49,19 +48,15 @@ public class SimulationGUI extends JPanel {
                     stringBuilder.append("M/s");
                     stringBuilder.append("<br/>");
                     stringBuilder.append("X ");
-                    stringBuilder.append(robot.getMatCoordinates().getX());
+                    stringBuilder.append((int) robot.getMatCoordinates().getX());
                     stringBuilder.append("<br/>");
                     stringBuilder.append("Y ");
-                    stringBuilder.append(robot.getMatCoordinates().getY());
+                    stringBuilder.append((int) robot.getMatCoordinates().getY());
                     stringBuilder.append("<br/>");
                     stringBuilder.append("α ");
-                    stringBuilder.append((float) robot.getAngle() * 360);
+                    stringBuilder.append((int) (robot.getAngle() * 360));
+                    stringBuilder.append("</p>");
                     stringBuilder.append("<br/>");
-                }
-                for (Controller controller : ControllerEnvironment.getDefaultEnvironment().getControllers()) {
-                    for (Component component : controller.getComponents())
-                        if (component.getName().replaceAll("x|y|z", "").isEmpty())
-                            stringBuilder.append(component.getName() + " " + component.getPollData() + "<br/>");
                 }
                 info.setText(stringBuilder.toString());
             }
@@ -74,6 +69,9 @@ public class SimulationGUI extends JPanel {
 
         public SimulationView(Dimension size, Simulation simulation, int refreshRate) {
             this.simulation = simulation;
+            int height = size.height;
+            int width = height * simulation.getMat().getSizeX() / simulation.getMat().getSizeY();
+            size = new Dimension(width, height);
             setPreferredSize(size);
             setMaximumSize(size);
             setMaximumSize(size);
