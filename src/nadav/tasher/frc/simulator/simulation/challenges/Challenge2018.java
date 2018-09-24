@@ -1,6 +1,7 @@
 package nadav.tasher.frc.simulator.simulation.challenges;
 
 import nadav.tasher.frc.simulator.simulation.obstacles.Block;
+import nadav.tasher.frc.simulator.simulation.obstacles.Portal;
 import nadav.tasher.frc.simulator.simulation.robots.types.DynamicRobot;
 
 public class Challenge2018 {
@@ -12,7 +13,7 @@ public class Challenge2018 {
             super(20, 20);
             addObstacle(new Block(new Coordinates(5, 5)));
             addObstacle(new Block(new Coordinates(13, 5)));
-            addObstacle(new Block(new Coordinates(8, 15)));
+            addObstacle(new Portal(3, 3, new Coordinates(8, 15), new Coordinates(1, 19)));
         }
     }
 }
