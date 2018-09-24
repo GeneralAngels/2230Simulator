@@ -72,10 +72,10 @@ public class Entity extends Nameable {
         Coordinates actualSize = matToPixels(graphics, mat, new Mat.Coordinates((int) (sizeX * 10), (int) (sizeY * 10)));
 //        System.out.println(getName()+ " PXCORD:"+gfxCoordinates.getX()+","+gfxCoordinates.getY()+" PXSZ: "+actualSize.getX()+","+actualSize.getY());
         Rectangle entity = new Rectangle(
-                coordinates.getX(),
-                coordinates.getY(),
-                actualSize.getX(),
-                actualSize.getY()
+                (int) coordinates.getX(),
+                (int) coordinates.getY(),
+                (int) actualSize.getX(),
+                (int) actualSize.getY()
         );
         Path2D.Double path = new Path2D.Double();
         path.append(entity, false);
@@ -87,13 +87,13 @@ public class Entity extends Nameable {
     }
 
     private Coordinates matToPixels(Graphics2D graphics, Mat mat, Mat.Coordinates coordinates) {
-        int gX = (int) graphics.getClip().getBounds().getWidth();
-        int gY = (int) graphics.getClip().getBounds().getHeight();
-        int mX = mat.getSizeX();
-        int mY = mat.getSizeY();
-        int cX = coordinates.getX();
-        int cY = coordinates.getY();
-        int rX, rY;
+        double gX = graphics.getClip().getBounds().getWidth();
+        double gY = graphics.getClip().getBounds().getHeight();
+        double mX = mat.getSizeX();
+        double mY = mat.getSizeY();
+        double cX = coordinates.getX();
+        double cY = coordinates.getY();
+        double rX, rY;
         rX = (gX / mX) * cX;
         rY = (gY / mY) * cY;
         return new Coordinates(rX, rY);

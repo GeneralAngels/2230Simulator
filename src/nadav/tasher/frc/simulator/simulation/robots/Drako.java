@@ -24,9 +24,6 @@ public class Drako extends ChallengeRobot2018 {
         if (component.getName().equals("Thumb") && component.getPollData() == 1) {
             setAngle(0.125);
         }
-        if (component.getName().equals("z")) {
-            setAngle(Math.abs(component.getPollData()));
-        }
 //        System.out.println("Angle "+getAngle());
     }
 }

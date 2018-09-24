@@ -53,7 +53,7 @@ public class Mat {
     }
 
     public static class Coordinates extends nadav.tasher.frc.simulator.simulation.Coordinates {
-        public Coordinates(int x, int y) {
+        public Coordinates(double x, double y) {
             super(x, y);
         }
     }

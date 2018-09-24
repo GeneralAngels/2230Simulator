@@ -1,18 +1,18 @@
 package nadav.tasher.frc.simulator.simulation;
 
 public class Coordinates {
-    private int x, y;
+    private double x, y;
 
-    public Coordinates(int x, int y) {
+    public Coordinates(double x, double y) {
         this.x = x;
         this.y = y;
     }
 
-    public int getX() {
+    public double getX() {
         return x;
     }
 
-    public int getY() {
+    public double getY() {
         return y;
     }
 }

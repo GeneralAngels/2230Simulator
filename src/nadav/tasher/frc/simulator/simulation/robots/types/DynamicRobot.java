@@ -22,9 +22,10 @@ public class DynamicRobot extends Robot {
         } else if (component.getName().equals("y")) {
             Mat.Coordinates current = getMatCoordinates();
             // Thing To Move Robot In Angle
-            int x = (int) ((double) current.getX() + value * Math.cos(180 - getAngle() * 360));
-            int y = (int) ((double) current.getY() + value * Math.sin(180 - getAngle() * 360));
-            System.out.println("X,Y Togo " + value * Math.cos(180 - getAngle() * 360) + "," + value * Math.sin(180 - getAngle() * 360));
+            double x = (current.getX() + value * Math.cos(getAngle() * 360));
+            double y = (current.getY() + value * Math.sin(getAngle() * 360));
+//            System.out.println(value + " " + (x - current.getX()));
+//            System.out.println("X,Y Togo " + value * Math.cos(180 - getAngle() * 360) + "," + value * Math.sin(180 - getAngle() * 360));
             setMatCoordinates(bound(new Mat.Coordinates(x, y), mat));
         } else if (component.getName().equals("z")) {
         }
@@ -39,8 +40,8 @@ public class DynamicRobot extends Robot {
     }
 
     private Mat.Coordinates bound(Mat.Coordinates coordinates, Mat mat) {
-        int x = coordinates.getX();
-        int y = coordinates.getY();
+        double x = coordinates.getX();
+        double y = coordinates.getY();
         x = (x >= 0) ? x : 0;
         x = (x <= mat.getSizeX()) ? x : mat.getSizeX();
         y = (y >= 0) ? y : 0;
