@@ -5,6 +5,7 @@ import java.awt.geom.AffineTransform;
 import java.awt.geom.Path2D;
 
 public class Entity extends Nameable {
+    private static final double collisionPadding = 0.1;
     private double sizeX = 1, sizeY = 1, sizeZ = 1, mass = 10;
     private double angle = 0;
     private Mat.Coordinates matCoordinates = new Mat.Coordinates(0, 0);
@@ -91,7 +92,19 @@ public class Entity extends Nameable {
     }
 
     protected Mat.Coordinates collision(Entity collision, Mat.Coordinates requested) {
-        return collision.getMatCoordinates();
+        double nX = requested.getX();
+        double nY = requested.getY();
+        double startX = getMatCoordinates().getX() - collision.getSizeX(), endX = startX + getSizeX() + collision.getSizeX();
+        double startY = getMatCoordinates().getY() - collision.getSizeY(), endY = startY + getSizeY() + collision.getSizeY();
+        nY = (nX > startX && nX < endX) ? find(nY, startY, endY) : nY;
+        nX = (nY > startY && nY < endY) ? find(nX, startX, endX) : nX;
+        return new Mat.Coordinates(nX, nY);
+    }
+
+    private double find(double current, double start, double end) {
+        if (current <= start + collisionPadding) return start - collisionPadding;
+        if (current >= end - collisionPadding) return end + collisionPadding;
+        return current;
     }
 
     private Coordinates matToPixels(Graphics2D graphics, Mat mat, Mat.Coordinates coordinates) {
