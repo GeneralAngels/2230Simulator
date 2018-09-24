@@ -11,6 +11,7 @@ public class Challenge2018 {
         public Mat() {
             super(20, 20);
             addObstacle(new Block(new Coordinates(5, 5)));
+            addObstacle(new Block(new Coordinates(12, 5)));
         }
     }
 }

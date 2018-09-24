@@ -50,6 +50,10 @@ public class Entity extends Nameable {
         this.matCoordinates = matCoordinates;
     }
 
+    protected void setMatCoordinates(Mat mat, Mat.Coordinates matCoordinates) {
+        this.matCoordinates = mat.bound(this, matCoordinates);
+    }
+
     public double getAngle() {
         return angle;
     }
@@ -84,6 +88,10 @@ public class Entity extends Nameable {
         path.transform(transform);
         graphics.draw(path);
         graphics.fill(path);
+    }
+
+    protected Mat.Coordinates collision(Entity collision) {
+        return collision.getMatCoordinates();
     }
 
     private Coordinates matToPixels(Graphics2D graphics, Mat mat, Mat.Coordinates coordinates) {

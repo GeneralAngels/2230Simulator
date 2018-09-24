@@ -28,6 +28,25 @@ public class Mat {
         obstacles.add(obstacle);
     }
 
+    public Mat.Coordinates bound(Entity entity, Mat.Coordinates requested) {
+        double nX = requested.getX();
+        double nY = requested.getY();
+        ArrayList<Entity> all = new ArrayList<>();
+        all.addAll(robots);
+        all.addAll(obstacles);
+        all.remove(entity);
+        if (nX < 0 || nX > getSizeX() - entity.getSizeX() || nY < 0 || nY > getSizeY() - entity.getSizeY())
+            return entity.getMatCoordinates();
+        for (Entity e : all) {
+            double startX = e.getMatCoordinates().getX() - entity.getSizeX(), endX = startX + e.getSizeX() + entity.getSizeX();
+            double startY = e.getMatCoordinates().getY() - entity.getSizeY(), endY = startY + e.getSizeY() + entity.getSizeY();
+            if (nX >= startX && nX <= endX && nY >= startY && nY <= endY) {
+                return bound(entity, e.collision(entity));
+            }
+        }
+        return requested;
+    }
+
     public void draw(Graphics graphics) {
         Graphics2D graphics2d = (Graphics2D) graphics;
         graphics2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);

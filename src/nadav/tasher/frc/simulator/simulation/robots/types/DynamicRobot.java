@@ -26,7 +26,7 @@ public class DynamicRobot extends Robot {
                 Mat.Coordinates current = getMatCoordinates();
                 double x = (current.getX() + speed * Math.cos(Math.toRadians(getAngle() * 360)));
                 double y = (current.getY() + speed * Math.sin(Math.toRadians(getAngle() * 360)));
-                setMatCoordinates(bound(new Mat.Coordinates(x, y), mat));
+                setMatCoordinates(mat, new Mat.Coordinates(x, y));
             }
         } else if (component.getName().equals("z")) {
         }
