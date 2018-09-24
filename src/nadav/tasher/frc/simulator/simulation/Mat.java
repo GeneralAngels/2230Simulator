@@ -31,12 +31,18 @@ public class Mat {
     public Mat.Coordinates bound(Entity entity, Mat.Coordinates requested) {
         double nX = requested.getX();
         double nY = requested.getY();
+        // Bound to mat
+        nX = (nX >= 0) ? nX : 0;
+        nX = (nX <= getSizeX() - entity.getSizeX()) ? nX : getSizeX() - entity.getSizeX();
+        nY = (nY >= 0) ? nY : 0;
+        nY = (nY <= getSizeY() - entity.getSizeY()) ? nY : getSizeY() - entity.getSizeY();
         ArrayList<Entity> all = new ArrayList<>();
+
         all.addAll(robots);
         all.addAll(obstacles);
         all.remove(entity);
-        if (nX < 0 || nX > getSizeX() - entity.getSizeX() || nY < 0 || nY > getSizeY() - entity.getSizeY())
-            return entity.getMatCoordinates();
+//        if (nX < 0 || nX > getSizeX() - entity.getSizeX() || nY < 0 || nY > getSizeY() - entity.getSizeY())
+//            return entity.getMatCoordinates();
         for (Entity e : all) {
             double startX = e.getMatCoordinates().getX() - entity.getSizeX(), endX = startX + e.getSizeX() + entity.getSizeX();
             double startY = e.getMatCoordinates().getY() - entity.getSizeY(), endY = startY + e.getSizeY() + entity.getSizeY();
@@ -44,7 +50,7 @@ public class Mat {
                 return bound(entity, e.collision(entity, requested));
             }
         }
-        return requested;
+        return new Coordinates(nX, nY);
     }
 
     public void draw(Graphics graphics) {
