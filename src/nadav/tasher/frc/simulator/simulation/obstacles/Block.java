@@ -17,11 +17,11 @@ public class Block extends Obstacle {
     }
 
     @Override
-    protected Mat.Coordinates collision(Entity collision) {
+    protected Mat.Coordinates collision(Entity collision, Mat.Coordinates requested) {
         if (collision instanceof DynamicRobot) {
 //            System.out.println(collision.getName()+" Collided With "+getName());
             setColor(Color.BLUE);
         }
-        return super.collision(collision);
+        return super.collision(collision, requested);
     }
 }

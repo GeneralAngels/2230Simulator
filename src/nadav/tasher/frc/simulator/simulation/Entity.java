@@ -90,7 +90,7 @@ public class Entity extends Nameable {
         graphics.fill(path);
     }
 
-    protected Mat.Coordinates collision(Entity collision) {
+    protected Mat.Coordinates collision(Entity collision, Mat.Coordinates requested) {
         return collision.getMatCoordinates();
     }
 
