@@ -17,7 +17,7 @@ public class Challenge2018 {
         public Mat() {
             super(30, 20);
             addObstacle(new Block(this, new Coordinates(5, 5)));
-            addObstacle(new Block(this, new Coordinates(12, 4)));
+//            addObstacle(new Block(this, new Coordinates(12, 4)));
             Portal portal = new Portal(this, 1, 1, new Coordinates(9, 15), new Coordinates(25, 16));
             portal.setColor(Color.MAGENTA);
             addObstacle(portal);
