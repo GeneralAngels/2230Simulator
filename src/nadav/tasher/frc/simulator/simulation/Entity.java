@@ -9,7 +9,12 @@ public class Entity extends Nameable {
     private double sizeX = 1, sizeY = 1, sizeZ = 1, mass = 10;
     private double angle = 0;
     private Mat.Coordinates matCoordinates = new Mat.Coordinates(0, 0);
+    private Mat mat;
     private Color color = Color.WHITE;
+
+    protected Entity(Mat mat) {
+        this.mat = mat;
+    }
 
     public double getSizeX() {
         return sizeX;
@@ -47,12 +52,16 @@ public class Entity extends Nameable {
         return matCoordinates;
     }
 
-    protected void setMatCoordinates(Mat.Coordinates matCoordinates) {
+    protected void forceMatCoordinates(Mat.Coordinates matCoordinates) {
         this.matCoordinates = matCoordinates;
     }
 
-    protected void setMatCoordinates(Mat mat, Mat.Coordinates matCoordinates) {
-        this.matCoordinates = mat.bound(this, matCoordinates);
+    protected void setMatCoordinates(Mat.Coordinates matCoordinates) {
+        if (mat != null) {
+            this.matCoordinates = mat.bound(this, matCoordinates);
+        } else {
+            forceMatCoordinates(matCoordinates);
+        }
     }
 
     public double getAngle() {
@@ -71,11 +80,17 @@ public class Entity extends Nameable {
         this.color = color;
     }
 
+    public void simulate(long elapsedTime) {
+    }
+
+    public Mat getMat() {
+        return mat;
+    }
+
     public void draw(Graphics2D graphics, Mat mat) {
         graphics.setColor(color);
         Coordinates coordinates = matToPixels(graphics, mat, matCoordinates);
         Coordinates actualSize = matToPixels(graphics, mat, new Mat.Coordinates((int) (sizeX), (int) (sizeY)));
-//        System.out.println(getName()+ " PXCORD:"+gfxCoordinates.getX()+","+gfxCoordinates.getY()+" PXSZ: "+actualSize.getX()+","+actualSize.getY());
         Rectangle entity = new Rectangle(
                 (int) coordinates.getX(),
                 (int) coordinates.getY(),
@@ -98,24 +113,23 @@ public class Entity extends Nameable {
         double startY = getMatCoordinates().getY() - collision.getSizeY(), endY = startY + getSizeY() + collision.getSizeY();
 //        nY = (nX >= startX && nX <= endX) ? find(nY, startY, endY) : nY;
 //        nX = (nY >= startY && nY <= endY) ? find(nX, startX, endX) : nX;
-        if (nX - endX <= 0 && nY - endY <= 0) {
-            if (nY - startY > nX - startX) {
-                nX = (nY > startY && nY < endY) ? startX : nX;
-                nY = (nX > startX && nX < endX) ? startY : nY;
-            } else {
-                nY = (nX > startX && nX < endX) ? startY : nY;
-                nX = (nY > startY && nY < endY) ? startX : nX;
-            }
-        } else {
-            if (nY - endY > nX - endX) {
-                nX = (nY > startY && nY < endY) ? endX : nX;
-                nY = (nX > startX && nX < endX) ? endY : nY;
-            } else {
-                nY = (nX > startX && nX < endX) ? endY : nY;
-                nX = (nY > startY && nY < endY) ? endX : nX;
-            }
-        }
-        return new Mat.Coordinates(nX, nY);
+        boolean fX = (nX < endX && nX > startX);
+        boolean fY = (nY < endY && nY > startY);
+        boolean bottom = nY > startY;
+        boolean top = bottom && nY < endY;
+        boolean right = nX > startX;
+        boolean left = right & nX < endX;
+        if (!top && bottom) nY = endY;
+        if (top) nY = startY;
+        if (!left && right) nX = endX;
+        if (left) nX = startX;
+        System.out.println(top + " " + bottom + " " + left + " " + right);
+        return collision.getMatCoordinates();
+//        return new Mat.Coordinates(nX,nY);
+    }
+
+    private int round(double d) {
+        return (int) ((d % 1 > 0.5) ? (d - d % 1) + 1 : (d - d % 1));
     }
 
     private double find(double current, double start, double end) {

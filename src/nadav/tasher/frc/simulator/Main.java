@@ -28,7 +28,8 @@ public class Main {
     private static void loadGUI() {
         mainFrame = new JFrame(programName + " " + programVersion);
         mainFrame.setUndecorated(true);
-        mainFrame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+//        mainFrame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        mainFrame.setSize(1330, 600);
         mainFrame.setContentPane(new SimulationGUI());
         mainFrame.setVisible(true);
     }

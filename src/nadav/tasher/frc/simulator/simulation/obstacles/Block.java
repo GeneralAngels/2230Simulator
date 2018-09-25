@@ -8,7 +8,8 @@ import nadav.tasher.frc.simulator.simulation.robots.types.DynamicRobot;
 import java.awt.*;
 
 public class Block extends Obstacle {
-    public Block(Mat.Coordinates matCoordinates) {
+    public Block(Mat mat, Mat.Coordinates matCoordinates) {
+        super(mat);
         setMatCoordinates(matCoordinates);
         setColor(new Color(200, 100, 0));
         setSizeX(5);

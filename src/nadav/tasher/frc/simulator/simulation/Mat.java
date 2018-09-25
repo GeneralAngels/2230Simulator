@@ -20,6 +20,13 @@ public class Mat {
         this.sizeY = sizeY;
     }
 
+    public ArrayList<Entity> getAllEntities() {
+        ArrayList<Entity> entities = new ArrayList<>();
+        entities.addAll(robots);
+        entities.addAll(obstacles);
+        return entities;
+    }
+
     public void addRobot(DynamicRobot robot) {
         robots.add(robot);
     }
@@ -37,12 +44,9 @@ public class Mat {
         nY = (nY >= 0) ? nY : 0;
         nY = (nY <= getSizeY() - entity.getSizeY()) ? nY : getSizeY() - entity.getSizeY();
         ArrayList<Entity> all = new ArrayList<>();
-
         all.addAll(robots);
         all.addAll(obstacles);
         all.remove(entity);
-//        if (nX < 0 || nX > getSizeX() - entity.getSizeX() || nY < 0 || nY > getSizeY() - entity.getSizeY())
-//            return entity.getMatCoordinates();
         for (Entity e : all) {
             double startX = e.getMatCoordinates().getX() - entity.getSizeX(), endX = startX + e.getSizeX() + entity.getSizeX();
             double startY = e.getMatCoordinates().getY() - entity.getSizeY(), endY = startY + e.getSizeY() + entity.getSizeY();
@@ -60,11 +64,11 @@ public class Mat {
         Graphics2D graphics2d = (Graphics2D) graphics;
         graphics2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         graphics2d.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_SPEED);
-        for (Robot r : robots) {
-            r.draw(graphics2d, this);
-        }
         for (Obstacle o : obstacles) {
             o.draw(graphics2d, this);
+        }
+        for (Robot r : robots) {
+            r.draw(graphics2d, this);
         }
     }
 

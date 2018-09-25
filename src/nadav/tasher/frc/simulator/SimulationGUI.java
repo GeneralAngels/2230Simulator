@@ -27,7 +27,7 @@ public class SimulationGUI extends JPanel {
         setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
         setBackground(Color.DARK_GRAY);
         currentSimulation = new Simulation(new Challenge2018.Mat(), simulationRate);
-        currentSimulation.getMat().addRobot(new Drako());
+        currentSimulation.getMat().addRobot(new Drako(currentSimulation.getMat()));
         simulationView = new SimulationView(new Dimension(y(), y()), currentSimulation, 50);
         add(simulationView);
         add(info);

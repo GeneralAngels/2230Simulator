@@ -39,6 +39,7 @@ public class Simulation {
             @Override
             public void run() {
                 handleInputs();
+                for (Entity entity : mat.getAllEntities()) entity.simulate(SECOND / simulationRate);
             }
         }, 0, SECOND / simulationRate);
     }
