@@ -52,7 +52,7 @@ public class Simulation {
         for (Controller controller : ControllerEnvironment.getDefaultEnvironment().getControllers()) {
             controller.poll();
             for (Component component : controller.getComponents()) {
-                for (DynamicRobot r : mat.getRobots()) r.handleComponent(component, mat);
+                for (DynamicRobot r : mat.getRobots()) r.handleComponent(component);
             }
         }
     }

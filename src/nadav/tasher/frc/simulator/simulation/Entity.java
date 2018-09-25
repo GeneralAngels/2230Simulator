@@ -86,10 +86,10 @@ public class Entity extends Nameable {
         return mat;
     }
 
-    public void draw(Graphics2D graphics, Mat mat) {
+    public void draw(Graphics2D graphics) {
         graphics.setColor(color);
-        Coordinates coordinates = matToPixels(graphics, mat, matCoordinates);
-        Coordinates actualSize = matToPixels(graphics, mat, new Mat.Coordinates((int) (sizeX), (int) (sizeY)));
+        Coordinates coordinates = matToPixels(graphics, matCoordinates);
+        Coordinates actualSize = matToPixels(graphics, new Mat.Coordinates((int) (sizeX), (int) (sizeY)));
         Rectangle entity = new Rectangle(
                 (int) coordinates.getX(),
                 (int) coordinates.getY(),
@@ -115,7 +115,7 @@ public class Entity extends Nameable {
         return collision.getMatCoordinates();
     }
 
-    private Coordinates matToPixels(Graphics2D graphics, Mat mat, Mat.Coordinates coordinates) {
+    protected Coordinates matToPixels(Graphics2D graphics, Mat.Coordinates coordinates) {
         double gX = graphics.getClip().getBounds().getWidth();
         double gY = graphics.getClip().getBounds().getHeight();
         double mX = mat.getSizeX();
@@ -126,5 +126,19 @@ public class Entity extends Nameable {
         rX = (gX / mX) * cX;
         rY = (gY / mY) * cY;
         return new Coordinates(rX, rY);
+    }
+
+    protected void track(Entity entity, Graphics2D graphics, Color color) {
+        Mat.Coordinates centerSelf = new Mat.Coordinates(getMatCoordinates().getX() + getSizeX() / 2, getMatCoordinates().getY() + getSizeY() / 2);
+        Mat.Coordinates centerEntity = new Mat.Coordinates(entity.getMatCoordinates().getX() + entity.getSizeX() / 2, entity.getMatCoordinates().getY() + entity.getSizeY() / 2);
+        Coordinates tracking1 = matToPixels(graphics, centerSelf);
+        Coordinates tracking2 = matToPixels(graphics, centerEntity);
+        graphics.setColor(color);
+        graphics.drawLine(
+                (int) (tracking1.getX()),
+                (int) (tracking1.getY()),
+                (int) (tracking2.getX()),
+                (int) (tracking2.getY())
+        );
     }
 }

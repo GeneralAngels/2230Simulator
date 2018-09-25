@@ -54,7 +54,9 @@ public class Mat {
 //                return bound(entity, e.collision(entity, requested));
 //            }
             if (nX > startX && nX < endX && nY > startY && nY < endY) {
-                return bound(entity, e.collision(entity, requested));
+                Mat.Coordinates unbounded = e.collision(entity, requested);
+                if (unbounded != null)
+                    return bound(entity, unbounded);
             }
         }
         return new Coordinates(nX, nY);
@@ -65,10 +67,10 @@ public class Mat {
         graphics2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         graphics2d.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_SPEED);
         for (Obstacle o : obstacles) {
-            o.draw(graphics2d, this);
+            o.draw(graphics2d);
         }
         for (Robot r : robots) {
-            r.draw(graphics2d, this);
+            r.draw(graphics2d);
         }
     }
 

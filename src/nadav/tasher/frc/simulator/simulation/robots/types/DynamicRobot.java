@@ -22,7 +22,7 @@ public class DynamicRobot extends Robot {
         super.simulate(elapsedTime);
     }
 
-    public void handleComponent(Component component, Mat mat) {
+    public void handleComponent(Component component) {
         double value = component.getPollData();
         if (component.getName().equals("x")) {
             setAngle(bound(getAngle() + value / 100));
@@ -34,6 +34,10 @@ public class DynamicRobot extends Robot {
 
     public double getSpeed() {
         return speed;
+    }
+
+    protected void setSpeed(double speed) {
+        this.speed = speed;
     }
 
     private double bound(double value) {
