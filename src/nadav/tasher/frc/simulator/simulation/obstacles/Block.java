@@ -8,21 +8,23 @@ import nadav.tasher.frc.simulator.simulation.robots.types.DynamicRobot;
 import java.awt.*;
 
 public class Block extends Obstacle {
-    public Block(Mat mat, Mat.Coordinates matCoordinates) {
+    public Block(Mat mat, double sizeX, double sizeY, Mat.Coordinates matCoordinates) {
         super(mat);
         setMatCoordinates(matCoordinates);
-        setColor(new Color(200, 100, 0));
-        setSizeX(5);
-        setSizeY(5);
-        setSizeZ(5);
+        setSizeX(sizeX);
+        setSizeY(sizeY);
     }
 
     @Override
     protected Mat.Coordinates collision(Entity collision, Mat.Coordinates requested) {
         if (collision instanceof DynamicRobot) {
-//            System.out.println(collision.getName()+" Collided With "+getName());
-            setColor(Color.BLUE);
+            return super.collision(collision, requested);
         }
-        return super.collision(collision, requested);
+        return null;
+    }
+
+    @Override
+    public void setColor(Color color) {
+        super.setColor(color);
     }
 }
