@@ -21,7 +21,7 @@ public class DynamicRobot extends Robot {
         if (component.getName().equals("x")) {
             setAngle(bound(getAngle() + value / 100));
         } else if (component.getName().equals("y")) {
-            speed = -value / 10;
+            speed = -value / 1;
             if (value != 0) {
                 Mat.Coordinates current = getMatCoordinates();
                 double x = (current.getX() + speed * Math.cos(Math.toRadians(getAngle() * 360)));

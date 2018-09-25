@@ -46,7 +46,10 @@ public class Mat {
         for (Entity e : all) {
             double startX = e.getMatCoordinates().getX() - entity.getSizeX(), endX = startX + e.getSizeX() + entity.getSizeX();
             double startY = e.getMatCoordinates().getY() - entity.getSizeY(), endY = startY + e.getSizeY() + entity.getSizeY();
-            if (nX >= startX && nX <= endX && nY >= startY && nY <= endY) {
+//            if (nX >= startX && nX <= endX && nY >= startY && nY <= endY) {
+//                return bound(entity, e.collision(entity, requested));
+//            }
+            if (nX > startX && nX < endX && nY > startY && nY < endY) {
                 return bound(entity, e.collision(entity, requested));
             }
         }

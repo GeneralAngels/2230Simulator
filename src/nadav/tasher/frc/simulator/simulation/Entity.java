@@ -96,14 +96,33 @@ public class Entity extends Nameable {
         double nY = requested.getY();
         double startX = getMatCoordinates().getX() - collision.getSizeX(), endX = startX + getSizeX() + collision.getSizeX();
         double startY = getMatCoordinates().getY() - collision.getSizeY(), endY = startY + getSizeY() + collision.getSizeY();
-        nY = (nX >= startX && nX <= endX) ? find(nY, startY, endY) : nY;
-        nX = (nY >= startY && nY <= endY) ? find(nX, startX, endX) : nX;
+//        nY = (nX >= startX && nX <= endX) ? find(nY, startY, endY) : nY;
+//        nX = (nY >= startY && nY <= endY) ? find(nX, startX, endX) : nX;
+        if (nX - endX <= 0 && nY - endY <= 0) {
+            if (nY - startY > nX - startX) {
+                nX = (nY > startY && nY < endY) ? startX : nX;
+                nY = (nX > startX && nX < endX) ? startY : nY;
+            } else {
+                nY = (nX > startX && nX < endX) ? startY : nY;
+                nX = (nY > startY && nY < endY) ? startX : nX;
+            }
+        } else {
+            if (nY - endY > nX - endX) {
+                nX = (nY > startY && nY < endY) ? endX : nX;
+                nY = (nX > startX && nX < endX) ? endY : nY;
+            } else {
+                nY = (nX > startX && nX < endX) ? endY : nY;
+                nX = (nY > startY && nY < endY) ? endX : nX;
+            }
+        }
         return new Mat.Coordinates(nX, nY);
     }
 
     private double find(double current, double start, double end) {
-        if (current <= start + 2 * collisionPadding) return start - collisionPadding;
-        if (current >= end - 2 * collisionPadding) return end + collisionPadding;
+//        if (current <= start + 2 * collisionPadding) return start - collisionPadding;
+//        if (current >= end - 2 * collisionPadding) return end + collisionPadding;
+        if (current <= end) return start;
+        if (current >= start) return end;
         return current;
     }
 
