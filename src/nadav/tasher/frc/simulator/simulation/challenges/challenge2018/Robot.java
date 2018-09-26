@@ -55,5 +55,10 @@ public class Robot extends DynamicRobot {
         graphics.draw(path);
         graphics.fill(path);
     }
+
+    @Override
+    public String getStatus() {
+        return super.getStatus() + "\nHas Cube: " + hasCube;
+    }
 }
 

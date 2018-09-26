@@ -1,10 +1,10 @@
 package nadav.tasher.frc.simulator.simulation.challenges.challenge2018;
 
 import nadav.tasher.frc.simulator.simulation.Coordinates;
+import nadav.tasher.frc.simulator.simulation.challenges.challenge2018.obstacles.CubeDropoff;
+import nadav.tasher.frc.simulator.simulation.challenges.challenge2018.obstacles.CubePickup;
+import nadav.tasher.frc.simulator.simulation.challenges.challenge2018.obstacles.GateChecker;
 import nadav.tasher.frc.simulator.simulation.challenges.challenge2018.robots.Drako;
-import nadav.tasher.frc.simulator.simulation.entities.obstacles.Block;
-import nadav.tasher.frc.simulator.simulation.entities.obstacles.DoBlock;
-import nadav.tasher.frc.simulator.simulation.entities.obstacles.Portal;
 
 import java.awt.*;
 
@@ -14,57 +14,33 @@ public class Mat extends nadav.tasher.frc.simulator.simulation.Mat {
 
     public Mat() {
         super(30, 20);
-        Block b1 = new Block(this);
-        b1.setWidth(30);
-        b1.setHeight(2);
-        b1.setCoordinates(new Coordinates(0, 0));
-        b1.setColor(Color.ORANGE);
-        Block b2 = new Block(this);
-        b2.setWidth(6);
-        b2.setHeight(10);
-        b2.setCoordinates(new Coordinates(0, 5));
-        b2.setColor(Color.ORANGE);
-        Block b3 = new Block(this);
-        b3.setWidth(3);
-        b3.setHeight(6);
-        b3.setCoordinates(new Coordinates(8, 2));
-        b3.setColor(Color.ORANGE);
-        Block b4 = new Block(this);
-        b4.setWidth(7);
-        b4.setHeight(5);
-        b4.setCoordinates(new Coordinates(6, 10));
-        b4.setColor(Color.ORANGE);
-        Block b5 = new Block(this);
-        b5.setWidth(4);
-        b5.setHeight(11);
-        b5.setCoordinates(new Coordinates(13, 4));
-        b5.setColor(Color.ORANGE);
-        Block b6 = new Block(this);
-        b6.setWidth(11);
-        b6.setHeight(10);
-        b6.setCoordinates(new Coordinates(19, 2));
-        b6.setColor(Color.ORANGE);
-        Block b7 = new Block(this);
-        b7.setWidth(25);
-        b7.setHeight(6);
-        b7.setCoordinates(new Coordinates(5, 14));
-        b7.setColor(Color.ORANGE);
-        addObstacle(b1);
-        addObstacle(b2);
-        addObstacle(b3);
-        addObstacle(b4);
-        addObstacle(b5);
-        addObstacle(b6);
-        addObstacle(b7);
-        Portal portal = new Portal(this, new Coordinates(2, 17));
-        portal.setCoordinates(new Coordinates(28.5, 12.5));
-        DoBlock notifyAndReset = new DoBlock(this);
-        notifyAndReset.setWidth(5);
-        notifyAndReset.setHeight(5);
-        notifyAndReset.setCoordinates(new Coordinates(0, 15));
-        addObstacle(portal);
-        addObstacle(notifyAndReset);
-        addRobot(new Drako(this, Color.RED));
+        GateChecker blueChecker = new GateChecker(this, Color.BLUE);
+        blueChecker.setHeight(getHeight());
+        blueChecker.setWidth(1);
+        blueChecker.setCoordinates(new Coordinates(3, 0));
+        GateChecker redChecker = new GateChecker(this, Color.RED);
+        redChecker.setHeight(getHeight());
+        redChecker.setWidth(1);
+        redChecker.setCoordinates(new Coordinates(26, 0));
+        CubeDropoff dropoff = new CubeDropoff(this);
+        dropoff.setHeight(5);
+        dropoff.setWidth(5);
+        dropoff.setColor(Color.PINK);
+        dropoff.setCoordinates(new Coordinates(getWidth() / 2 - dropoff.getWidth() / 2, getHeight() / 2 - dropoff.getHeight() / 2));
+        CubePickup redPickup = new CubePickup(this, Color.RED);
+        redPickup.setWidth(2);
+        redPickup.setHeight(2);
+        redPickup.setCoordinates(new Coordinates(5, 0));
+        CubePickup bluePickup = new CubePickup(this, Color.BLUE);
+        bluePickup.setWidth(2);
+        bluePickup.setHeight(2);
+        bluePickup.setCoordinates(new Coordinates(23, 18));
+        addObstacle(blueChecker);
+        addObstacle(redChecker);
+        addObstacle(redPickup);
+        addObstacle(bluePickup);
+        addObstacle(dropoff);
+        addRobot(new Drako(this, Color.BLUE));
     }
 
     public void addRed(int toAdd) {

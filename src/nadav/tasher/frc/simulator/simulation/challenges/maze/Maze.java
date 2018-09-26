@@ -67,7 +67,7 @@ public class Maze {
             notifyAndReset.setWidth(5);
             notifyAndReset.setHeight(5);
             notifyAndReset.setCoordinates(new Coordinates(0, 15));
-            notifyAndReset.setTodo(() -> {
+            notifyAndReset.setTodo((collision, requested) -> {
                 Utils.tellUser("Finished!");
                 return new Coordinates(1, 3);
             });

@@ -9,6 +9,6 @@ public class Portal extends DoBlock {
     public Portal(Mat mat, Coordinates teleport) {
         super(mat);
         setColor(Color.MAGENTA);
-        setTodo(() -> teleport);
+        setTodo((collision, requestedCoordinates) -> teleport);
     }
 }

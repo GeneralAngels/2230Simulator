@@ -49,7 +49,7 @@ public class SimulationGUI extends JPanel {
                     stringBuilder.append("</p>");
                     stringBuilder.append("<br/>");
                 }
-                stringBuilder.append(currentSimulation.getMat().getStatus());
+                stringBuilder.append("<p style=\"color: #FFFFFF\">" + currentSimulation.getMat().getStatus() + "</p>");
                 info.setText(stringBuilder.toString());
             }
         }, 0, 1000 / 10);
