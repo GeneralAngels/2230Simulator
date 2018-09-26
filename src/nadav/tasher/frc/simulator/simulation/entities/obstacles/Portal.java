@@ -1,4 +1,4 @@
-package nadav.tasher.frc.simulator.simulation.obstacles;
+package nadav.tasher.frc.simulator.simulation.entities.obstacles;
 
 import nadav.tasher.frc.simulator.simulation.Coordinates;
 import nadav.tasher.frc.simulator.simulation.Mat;

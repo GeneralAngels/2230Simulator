@@ -18,6 +18,10 @@ public class Coordinates {
 
     @Override
     public String toString() {
+        return "X: " + (int) getX() + ", Y: " + (int) getY();
+    }
+
+    public String toLongString() {
         return "X: " + getX() + ", Y: " + getY();
     }
 }

@@ -2,7 +2,7 @@ package nadav.tasher.frc.simulator.simulation;
 
 import nadav.tasher.frc.simulator.simulation.entities.Obstacle;
 import nadav.tasher.frc.simulator.simulation.entities.Robot;
-import nadav.tasher.frc.simulator.simulation.robots.types.DynamicRobot;
+import nadav.tasher.frc.simulator.simulation.entities.robots.DynamicRobot;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -33,6 +33,10 @@ public class Mat {
 
     public void addObstacle(Obstacle obstacle) {
         obstacles.add(obstacle);
+    }
+
+    public String getStatus() {
+        return "Robots: " + robots.size() + ", Obstacles: " + obstacles.size();
     }
 
     public Coordinates bound(Entity entity, Coordinates requested) {

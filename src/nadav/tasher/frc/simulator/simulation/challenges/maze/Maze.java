@@ -1,15 +1,15 @@
-package nadav.tasher.frc.simulator.simulation.challenges;
+package nadav.tasher.frc.simulator.simulation.challenges.maze;
 
 import nadav.tasher.frc.simulator.Utils;
 import nadav.tasher.frc.simulator.simulation.Coordinates;
-import nadav.tasher.frc.simulator.simulation.obstacles.Block;
-import nadav.tasher.frc.simulator.simulation.obstacles.DoBlock;
-import nadav.tasher.frc.simulator.simulation.obstacles.Portal;
-import nadav.tasher.frc.simulator.simulation.robots.types.DynamicRobot;
+import nadav.tasher.frc.simulator.simulation.entities.obstacles.Block;
+import nadav.tasher.frc.simulator.simulation.entities.obstacles.DoBlock;
+import nadav.tasher.frc.simulator.simulation.entities.obstacles.Portal;
+import nadav.tasher.frc.simulator.simulation.entities.robots.DynamicRobot;
 
 import java.awt.*;
 
-public class Challenge2018 {
+public class Maze {
     public static class Robot extends DynamicRobot {
         protected Robot(nadav.tasher.frc.simulator.simulation.Mat mat) {
             super(mat);

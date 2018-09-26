@@ -156,6 +156,11 @@ public class Entity extends Nameable {
         this.width = width;
     }
 
+    public String getStatus() {
+        return getCoordinates().toString() + "\n" +
+                "α: " + (int) (getAngle() * 360) + "°";
+    }
+
     public static class OpenEntity extends Entity {
         protected OpenEntity(Mat mat) {
             super(mat);

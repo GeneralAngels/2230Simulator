@@ -1,4 +1,4 @@
-package nadav.tasher.frc.simulator.simulation.obstacles;
+package nadav.tasher.frc.simulator.simulation.entities.obstacles;
 
 import nadav.tasher.frc.simulator.simulation.Coordinates;
 import nadav.tasher.frc.simulator.simulation.Entity;
@@ -22,10 +22,10 @@ public class DoBlock extends Obstacle {
 
     @Override
     protected Coordinates collision(Entity collision, Coordinates requested) {
-        return todo.todo();
+        return todo.todo(collision, requested);
     }
 
     public interface Todo {
-        Coordinates todo();
+        Coordinates todo(Entity collision, Coordinates requestedCoordinates);
     }
 }

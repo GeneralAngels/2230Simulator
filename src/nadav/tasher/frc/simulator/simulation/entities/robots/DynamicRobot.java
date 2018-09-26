@@ -1,4 +1,4 @@
-package nadav.tasher.frc.simulator.simulation.robots.types;
+package nadav.tasher.frc.simulator.simulation.entities.robots;
 
 import nadav.tasher.frc.simulator.simulation.Coordinates;
 import nadav.tasher.frc.simulator.simulation.Mat;

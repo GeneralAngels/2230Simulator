@@ -1,9 +1,8 @@
 package nadav.tasher.frc.simulator;
 
 import nadav.tasher.frc.simulator.simulation.Simulation;
-import nadav.tasher.frc.simulator.simulation.challenges.Challenge2018;
-import nadav.tasher.frc.simulator.simulation.robots.Drako;
-import nadav.tasher.frc.simulator.simulation.robots.types.DynamicRobot;
+import nadav.tasher.frc.simulator.simulation.challenges.challenge2018.Mat;
+import nadav.tasher.frc.simulator.simulation.entities.robots.DynamicRobot;
 
 import javax.swing.*;
 import java.awt.*;
@@ -26,8 +25,7 @@ public class SimulationGUI extends JPanel {
     private void init() {
         setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
         setBackground(Color.DARK_GRAY);
-        currentSimulation = new Simulation(new Challenge2018.Mat(), simulationRate);
-        currentSimulation.getMat().addRobot(new Drako(currentSimulation.getMat()));
+        currentSimulation = new Simulation(new Mat(), simulationRate);
         simulationView = new SimulationView(new Dimension(y(), y()), currentSimulation, 50);
         add(simulationView);
         add(info);
@@ -45,19 +43,13 @@ public class SimulationGUI extends JPanel {
                     stringBuilder.append("<br/>");
                     stringBuilder.append("V ");
                     stringBuilder.append((int) (robot.getSpeed() * simulationRate));
-                    stringBuilder.append("M/s");
+                    stringBuilder.append(" m/s");
                     stringBuilder.append("<br/>");
-                    stringBuilder.append("X ");
-                    stringBuilder.append((int) robot.getCoordinates().getX());
-                    stringBuilder.append("<br/>");
-                    stringBuilder.append("Y ");
-                    stringBuilder.append((int) robot.getCoordinates().getY());
-                    stringBuilder.append("<br/>");
-                    stringBuilder.append("α ");
-                    stringBuilder.append((int) (robot.getAngle() * 360));
+                    stringBuilder.append(robot.getStatus().replaceAll("\n", "<br/>"));
                     stringBuilder.append("</p>");
                     stringBuilder.append("<br/>");
                 }
+                stringBuilder.append(currentSimulation.getMat().getStatus());
                 info.setText(stringBuilder.toString());
             }
         }, 0, 1000 / 10);
