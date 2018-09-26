@@ -1,6 +1,7 @@
 package nadav.tasher.frc.simulator.simulation.robots;
 
 import nadav.tasher.frc.simulator.simulation.Coordinates;
+import nadav.tasher.frc.simulator.simulation.Entity;
 import nadav.tasher.frc.simulator.simulation.Mat;
 import nadav.tasher.frc.simulator.simulation.challenges.Challenge2018;
 import net.java.games.input.Component;
@@ -11,14 +12,14 @@ public class Drako extends Challenge2018.Robot {
 
     public Drako(Mat mat) {
         super(mat);
-        setColor(Color.WHITE);
+        setColor(Color.RED);
         setCoordinates(new Coordinates(1, 3));
     }
 
     @Override
     public void draw(Graphics2D graphics) {
         super.draw(graphics);
-//        for (Entity e : getMat().getAllEntities()) track(e, graphics, getColor());
+        for (Entity e : getMat().getAllEntities()) track(e, graphics, getColor());
     }
 
     @Override

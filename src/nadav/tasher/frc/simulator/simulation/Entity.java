@@ -88,7 +88,22 @@ public class Entity extends Nameable {
         double startY = getCoordinates().getY() - collision.getHeight(), endY = startY + getHeight() + collision.getHeight();
 //        nY = (nX >= startX && nX <= endX) ? find(nY, startY, endY) : nY;
 //        nX = (nY >= startY && nY <= endY) ? find(nX, startX, endX) : nX;
-        return collision.getCoordinates();
+        boolean l = nX < startX + collision.getWidth() / 2;
+        boolean r = nX >= endX - collision.getWidth() / 2;
+        boolean t = nY < startY + collision.getHeight() / 2;
+        boolean b = nY >= endY - collision.getHeight() / 2;
+        if (r) return new Coordinates(endX, nY);
+        if (l) return new Coordinates(startX, nY);
+        if (t) return new Coordinates(nX, startY);
+        if (b) return new Coordinates(nX, endY);
+        return null;
+    }
+
+    private double matchClosest(double current, double a, double b) {
+        if (current - a >= b - current) {
+            return a;
+        }
+        return b;
     }
 
     protected Coordinates matToPixels(Graphics2D graphics, Coordinates coordinates) {

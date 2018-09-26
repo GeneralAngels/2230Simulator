@@ -15,4 +15,9 @@ public class Coordinates {
     public double getY() {
         return y;
     }
+
+    @Override
+    public String toString() {
+        return "X: " + getX() + ", Y: " + getY();
+    }
 }
