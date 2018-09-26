@@ -68,7 +68,7 @@ public class SimulationGUI extends JPanel {
             setMaximumSize(size);
             setMaximumSize(size);
             setSize(size);
-            setBackground(Color.BLACK);
+            setBackground(new Color(20, 20, 20));
             new Timer().scheduleAtFixedRate(new TimerTask() {
                 @Override
                 public void run() {
