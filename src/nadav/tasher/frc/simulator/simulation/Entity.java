@@ -99,13 +99,6 @@ public class Entity extends Nameable {
         return null;
     }
 
-    private double matchClosest(double current, double a, double b) {
-        if (current - a >= b - current) {
-            return a;
-        }
-        return b;
-    }
-
     protected Coordinates matToPixels(Graphics2D graphics, Coordinates coordinates) {
         double gX = graphics.getClip().getBounds().getWidth();
         double gY = graphics.getClip().getBounds().getHeight();
