@@ -5,38 +5,14 @@ import java.awt.geom.AffineTransform;
 import java.awt.geom.Path2D;
 
 public class Entity extends Nameable {
-    private double sizeX = 1, sizeY = 1, sizeZ = 1, mass = 10;
+    private double width = 1, height = 1, depth = 1, mass = 10;
     private double angle = 0;
-    private Mat.Coordinates matCoordinates = new Mat.Coordinates(0, 0);
+    private Coordinates coordinates = new Coordinates(0, 0);
     private Mat mat;
     private Color color = Color.WHITE;
 
     protected Entity(Mat mat) {
         this.mat = mat;
-    }
-
-    public double getSizeX() {
-        return sizeX;
-    }
-
-    protected void setSizeX(double sizeX) {
-        this.sizeX = sizeX;
-    }
-
-    public double getSizeZ() {
-        return sizeZ;
-    }
-
-    protected void setSizeZ(double sizeZ) {
-        this.sizeZ = sizeZ;
-    }
-
-    public double getSizeY() {
-        return sizeY;
-    }
-
-    protected void setSizeY(double sizeY) {
-        this.sizeY = sizeY;
     }
 
     public double getMass() {
@@ -47,20 +23,20 @@ public class Entity extends Nameable {
         this.mass = mass;
     }
 
-    public Mat.Coordinates getMatCoordinates() {
-        return matCoordinates;
+    public Coordinates getCoordinates() {
+        return coordinates;
     }
 
-    protected void setMatCoordinates(Mat.Coordinates matCoordinates) {
+    protected void setCoordinates(Coordinates coordinates) {
         if (mat != null) {
-            this.matCoordinates = mat.bound(this, matCoordinates);
+            this.coordinates = mat.bound(this, coordinates);
         } else {
-            forceMatCoordinates(matCoordinates);
+            forceCoordinates(coordinates);
         }
     }
 
-    protected void forceMatCoordinates(Mat.Coordinates matCoordinates) {
-        this.matCoordinates = matCoordinates;
+    protected void forceCoordinates(Coordinates coordinates) {
+        this.coordinates = coordinates;
     }
 
     public double getAngle() {
@@ -88,8 +64,8 @@ public class Entity extends Nameable {
 
     public void draw(Graphics2D graphics) {
         graphics.setColor(color);
-        Coordinates coordinates = matToPixels(graphics, matCoordinates);
-        Coordinates actualSize = matToPixels(graphics, new Mat.Coordinates((int) (sizeX), (int) (sizeY)));
+        Coordinates coordinates = matToPixels(graphics, getCoordinates());
+        Coordinates actualSize = matToPixels(graphics, new Coordinates(getWidth(), getHeight()));
         Rectangle entity = new Rectangle(
                 (int) coordinates.getX(),
                 (int) coordinates.getY(),
@@ -105,21 +81,21 @@ public class Entity extends Nameable {
         graphics.fill(path);
     }
 
-    protected Mat.Coordinates collision(Entity collision, Mat.Coordinates requested) {
+    protected Coordinates collision(Entity collision, Coordinates requested) {
         double nX = requested.getX();
         double nY = requested.getY();
-        double startX = getMatCoordinates().getX() - collision.getSizeX(), endX = startX + getSizeX() + collision.getSizeX();
-        double startY = getMatCoordinates().getY() - collision.getSizeY(), endY = startY + getSizeY() + collision.getSizeY();
+        double startX = getCoordinates().getX() - collision.getWidth(), endX = startX + getWidth() + collision.getWidth();
+        double startY = getCoordinates().getY() - collision.getHeight(), endY = startY + getHeight() + collision.getHeight();
 //        nY = (nX >= startX && nX <= endX) ? find(nY, startY, endY) : nY;
 //        nX = (nY >= startY && nY <= endY) ? find(nX, startX, endX) : nX;
-        return collision.getMatCoordinates();
+        return collision.getCoordinates();
     }
 
-    protected Coordinates matToPixels(Graphics2D graphics, Mat.Coordinates coordinates) {
+    protected Coordinates matToPixels(Graphics2D graphics, Coordinates coordinates) {
         double gX = graphics.getClip().getBounds().getWidth();
         double gY = graphics.getClip().getBounds().getHeight();
-        double mX = mat.getSizeX();
-        double mY = mat.getSizeY();
+        double mX = mat.getWidth();
+        double mY = mat.getHeight();
         double cX = coordinates.getX();
         double cY = coordinates.getY();
         double rX, rY;
@@ -129,8 +105,8 @@ public class Entity extends Nameable {
     }
 
     protected void track(Entity entity, Graphics2D graphics, Color color) {
-        Mat.Coordinates centerSelf = new Mat.Coordinates(getMatCoordinates().getX() + getSizeX() / 2, getMatCoordinates().getY() + getSizeY() / 2);
-        Mat.Coordinates centerEntity = new Mat.Coordinates(entity.getMatCoordinates().getX() + entity.getSizeX() / 2, entity.getMatCoordinates().getY() + entity.getSizeY() / 2);
+        Coordinates centerSelf = getCenter();
+        Coordinates centerEntity = entity.getCenter();
         Coordinates tracking1 = matToPixels(graphics, centerSelf);
         Coordinates tracking2 = matToPixels(graphics, centerEntity);
         graphics.setColor(color);
@@ -140,5 +116,86 @@ public class Entity extends Nameable {
                 (int) (tracking2.getX()),
                 (int) (tracking2.getY())
         );
+    }
+
+    public Coordinates getCenter() {
+        double x = getCoordinates().getX() + getWidth() / 2;
+        double y = getCoordinates().getY() + getHeight() / 2;
+        return new Coordinates(x, y);
+    }
+
+    public double getDepth() {
+        return depth;
+    }
+
+    protected void setDepth(double depth) {
+        this.depth = depth;
+    }
+
+    public double getHeight() {
+        return height;
+    }
+
+    protected void setHeight(double height) {
+        this.height = height;
+    }
+
+    public double getWidth() {
+        return width;
+    }
+
+    protected void setWidth(double width) {
+        this.width = width;
+    }
+
+    public static class OpenEntity extends Entity {
+        protected OpenEntity(Mat mat) {
+            super(mat);
+        }
+
+        @Override
+        public void setColor(Color color) {
+            super.setColor(color);
+        }
+
+        @Override
+        public void setAngle(double angle) {
+            super.setAngle(angle);
+        }
+
+        @Override
+        public void setCoordinates(Coordinates coordinates) {
+            super.setCoordinates(coordinates);
+        }
+
+        @Override
+        public void forceCoordinates(Coordinates coordinates) {
+            super.forceCoordinates(coordinates);
+        }
+
+        @Override
+        public void setMass(double mass) {
+            super.setMass(mass);
+        }
+
+        @Override
+        public void setDepth(double depth) {
+            super.setDepth(depth);
+        }
+
+        @Override
+        public void setHeight(double height) {
+            super.setHeight(height);
+        }
+
+        @Override
+        public void setWidth(double width) {
+            super.setWidth(width);
+        }
+
+        @Override
+        public void track(Entity entity, Graphics2D graphics, Color color) {
+            super.track(entity, graphics, color);
+        }
     }
 }

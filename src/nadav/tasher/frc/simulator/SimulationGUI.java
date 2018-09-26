@@ -48,10 +48,10 @@ public class SimulationGUI extends JPanel {
                     stringBuilder.append("M/s");
                     stringBuilder.append("<br/>");
                     stringBuilder.append("X ");
-                    stringBuilder.append((int) robot.getMatCoordinates().getX());
+                    stringBuilder.append((int) robot.getCoordinates().getX());
                     stringBuilder.append("<br/>");
                     stringBuilder.append("Y ");
-                    stringBuilder.append((int) robot.getMatCoordinates().getY());
+                    stringBuilder.append((int) robot.getCoordinates().getY());
                     stringBuilder.append("<br/>");
                     stringBuilder.append("α ");
                     stringBuilder.append((int) (robot.getAngle() * 360));
@@ -70,7 +70,7 @@ public class SimulationGUI extends JPanel {
         public SimulationView(Dimension size, Simulation simulation, int refreshRate) {
             this.simulation = simulation;
             int height = size.height;
-            int width = height * simulation.getMat().getSizeX() / simulation.getMat().getSizeY();
+            int width = height * simulation.getMat().getWidth() / simulation.getMat().getHeight();
             size = new Dimension(width, height);
             setPreferredSize(size);
             setMaximumSize(size);

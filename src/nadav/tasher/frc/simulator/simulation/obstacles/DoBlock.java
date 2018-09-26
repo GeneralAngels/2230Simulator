@@ -1,25 +1,31 @@
 package nadav.tasher.frc.simulator.simulation.obstacles;
 
+import nadav.tasher.frc.simulator.simulation.Coordinates;
 import nadav.tasher.frc.simulator.simulation.Entity;
 import nadav.tasher.frc.simulator.simulation.Mat;
+import nadav.tasher.frc.simulator.simulation.entities.Obstacle;
 
-import java.awt.*;
+public class DoBlock extends Obstacle {
+    private Todo todo;
 
-public class DoBlock extends Block {
-    private Do todo;
+    public DoBlock(Mat mat) {
+        super(mat);
+    }
 
-    public DoBlock(Mat mat, double sizeX, double sizeY, Mat.Coordinates matCoordinates, Do todo) {
-        super(mat, sizeX, sizeY, matCoordinates);
+    public Todo getTodo() {
+        return todo;
+    }
+
+    public void setTodo(Todo todo) {
         this.todo = todo;
-        setColor(Color.RED);
     }
 
     @Override
-    protected Mat.Coordinates collision(Entity collision, Mat.Coordinates requested) {
+    protected Coordinates collision(Entity collision, Coordinates requested) {
         return todo.todo();
     }
 
-    public interface Do {
-        Mat.Coordinates todo();
+    public interface Todo {
+        Coordinates todo();
     }
 }

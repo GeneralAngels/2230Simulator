@@ -1,5 +1,6 @@
 package nadav.tasher.frc.simulator.simulation.obstacles;
 
+import nadav.tasher.frc.simulator.simulation.Coordinates;
 import nadav.tasher.frc.simulator.simulation.Entity;
 import nadav.tasher.frc.simulator.simulation.Mat;
 import nadav.tasher.frc.simulator.simulation.entities.Obstacle;
@@ -10,13 +11,6 @@ public class Tracker extends Obstacle {
     public Tracker(Mat mat) {
         super(mat);
         setColor(Color.GRAY);
-        setSizeX(1);
-        setSizeY(1);
-    }
-
-    @Override
-    public void setMatCoordinates(Mat.Coordinates matCoordinates) {
-        super.setMatCoordinates(matCoordinates);
     }
 
     @Override
@@ -28,7 +22,7 @@ public class Tracker extends Obstacle {
     }
 
     @Override
-    protected Mat.Coordinates collision(Entity collision, Mat.Coordinates requested) {
+    protected Coordinates collision(Entity collision, Coordinates requested) {
         return null;
     }
 }

@@ -1,5 +1,6 @@
 package nadav.tasher.frc.simulator.simulation.robots.types;
 
+import nadav.tasher.frc.simulator.simulation.Coordinates;
 import nadav.tasher.frc.simulator.simulation.Mat;
 import nadav.tasher.frc.simulator.simulation.entities.Robot;
 import net.java.games.input.Component;
@@ -14,10 +15,9 @@ public class DynamicRobot extends Robot {
     @Override
     public void simulate(long elapsedTime) {
         if (speed != 0) {
-            Mat.Coordinates current = getMatCoordinates();
-            double x = (current.getX() + speed * Math.cos(Math.toRadians(getAngle() * 360)));
-            double y = (current.getY() + speed * Math.sin(Math.toRadians(getAngle() * 360)));
-            setMatCoordinates(new Mat.Coordinates(x, y));
+            double x = (getCoordinates().getX() + speed * Math.cos(Math.toRadians(getAngle() * 360)));
+            double y = (getCoordinates().getY() + speed * Math.sin(Math.toRadians(getAngle() * 360)));
+            setCoordinates(new Coordinates(x, y));
         }
         super.simulate(elapsedTime);
     }

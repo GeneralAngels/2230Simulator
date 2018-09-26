@@ -8,16 +8,16 @@ import java.awt.*;
 import java.util.ArrayList;
 
 public class Mat {
-    private int sizeX = 100, sizeY = 100;
+    private int width = 100, height = 100;
     private ArrayList<Obstacle> obstacles = new ArrayList<>();
     private ArrayList<DynamicRobot> robots = new ArrayList<>();
 
     public Mat() {
     }
 
-    protected Mat(int sizeX, int sizeY) {
-        this.sizeX = sizeX;
-        this.sizeY = sizeY;
+    protected Mat(int width, int height) {
+        setWidth(width);
+        setHeight(height);
     }
 
     public ArrayList<Entity> getAllEntities() {
@@ -35,26 +35,26 @@ public class Mat {
         obstacles.add(obstacle);
     }
 
-    public Mat.Coordinates bound(Entity entity, Mat.Coordinates requested) {
+    public Coordinates bound(Entity entity, Coordinates requested) {
         double nX = requested.getX();
         double nY = requested.getY();
         // Bound to mat
         nX = (nX >= 0) ? nX : 0;
-        nX = (nX <= getSizeX() - entity.getSizeX()) ? nX : getSizeX() - entity.getSizeX();
+        nX = (nX <= getWidth() - entity.getWidth()) ? nX : getWidth() - entity.getWidth();
         nY = (nY >= 0) ? nY : 0;
-        nY = (nY <= getSizeY() - entity.getSizeY()) ? nY : getSizeY() - entity.getSizeY();
+        nY = (nY <= getHeight() - entity.getHeight()) ? nY : getHeight() - entity.getHeight();
         ArrayList<Entity> all = new ArrayList<>();
         all.addAll(robots);
         all.addAll(obstacles);
         all.remove(entity);
         for (Entity e : all) {
-            double startX = e.getMatCoordinates().getX() - entity.getSizeX(), endX = startX + e.getSizeX() + entity.getSizeX();
-            double startY = e.getMatCoordinates().getY() - entity.getSizeY(), endY = startY + e.getSizeY() + entity.getSizeY();
+            double startX = e.getCoordinates().getX() - entity.getWidth(), endX = startX + e.getWidth() + entity.getWidth();
+            double startY = e.getCoordinates().getY() - entity.getHeight(), endY = startY + e.getHeight() + entity.getHeight();
 //            if (nX >= startX && nX <= endX && nY >= startY && nY <= endY) {
 //                return bound(entity, e.collision(entity, requested));
 //            }
             if (nX > startX && nX < endX && nY > startY && nY < endY) {
-                Mat.Coordinates unbounded = e.collision(entity, requested);
+                Coordinates unbounded = e.collision(entity, requested);
                 if (unbounded != null)
                     return bound(entity, unbounded);
             }
@@ -74,12 +74,20 @@ public class Mat {
         }
     }
 
-    public int getSizeX() {
-        return sizeX;
+    public int getWidth() {
+        return width;
     }
 
-    public int getSizeY() {
-        return sizeY;
+    protected void setWidth(int width) {
+        this.width = width;
+    }
+
+    public int getHeight() {
+        return height;
+    }
+
+    protected void setHeight(int height) {
+        this.height = height;
     }
 
     public ArrayList<DynamicRobot> getRobots() {
@@ -88,11 +96,5 @@ public class Mat {
 
     public ArrayList<Obstacle> getObstacles() {
         return obstacles;
-    }
-
-    public static class Coordinates extends nadav.tasher.frc.simulator.simulation.Coordinates {
-        public Coordinates(double x, double y) {
-            super(x, y);
-        }
     }
 }
