@@ -56,11 +56,6 @@ public class Simulation {
             controllers[controller].poll();
             if (controller < robots.size()) {
                 for (Component component : controllers[controller].getComponents()) {
-                    if (controllers[controller].getType() == Controller.Type.STICK) {
-                        if (component.getIdentifier() == Component.Identifier.Axis.Y) {
-                            component = invertData(component);
-                        }
-                    }
                     robots.get(controller).handleComponent(component);
                 }
             }
