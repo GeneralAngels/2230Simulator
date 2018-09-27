@@ -11,7 +11,7 @@ public class Drako extends Robot {
         super(mat, teamColor);
     }
 
-    public Drako(Mat mat, Color teamColor, Coordinates initial) {
-        super(mat, teamColor, initial);
+    public Drako(Mat mat, Color teamColor, Coordinates initial, double angle) {
+        super(mat, teamColor, initial, angle);
     }
 }

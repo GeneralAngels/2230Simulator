@@ -44,8 +44,8 @@ public class Mat extends nadav.tasher.frc.simulator.simulation.simulation.Mat {
         addObstacle(redPickup);
         addObstacle(bluePickup);
         addObstacle(dropoff);
-        Drako red = new Drako(this, Color.RED, redSpawn);
-        Drako blue = new Drako(this, Color.BLUE, blueSpawn);
+        Drako red = new Drako(this, Color.RED, redSpawn, 0.5);
+        Drako blue = new Drako(this, Color.BLUE, blueSpawn, 0);
         addRobot(red);
         addRobot(blue);
     }

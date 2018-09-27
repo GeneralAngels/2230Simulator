@@ -16,10 +16,11 @@ public class Robot extends DynamicRobot {
         setTeamColor(teamColor);
     }
 
-    protected Robot(Mat mat, Color teamColor, Coordinates initial) {
+    protected Robot(Mat mat, Color teamColor, Coordinates initial, double angle) {
         super(mat);
         setTeamColor(teamColor);
         setCoordinates(initial);
+        setAngle(angle);
     }
 
     public Color getTeamColor() {
