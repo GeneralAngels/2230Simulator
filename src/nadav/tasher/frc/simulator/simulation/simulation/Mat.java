@@ -1,8 +1,8 @@
-package nadav.tasher.frc.simulator.simulation;
+package nadav.tasher.frc.simulator.simulation.simulation;
 
-import nadav.tasher.frc.simulator.simulation.entities.Obstacle;
-import nadav.tasher.frc.simulator.simulation.entities.Robot;
-import nadav.tasher.frc.simulator.simulation.entities.robots.DynamicRobot;
+import nadav.tasher.frc.simulator.simulation.simulation.entities.Obstacle;
+import nadav.tasher.frc.simulator.simulation.simulation.entities.Robot;
+import nadav.tasher.frc.simulator.simulation.simulation.entities.robots.DynamicRobot;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -36,7 +36,7 @@ public class Mat {
     }
 
     public String getStatus() {
-        return "Robots: " + robots.size() + ", Obstacles: " + obstacles.size();
+        return "Robots: " + robots.size() + "\nObstacles: " + obstacles.size();
     }
 
     public Coordinates bound(Entity entity, Coordinates requested) {

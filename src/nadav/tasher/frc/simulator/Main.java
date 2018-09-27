@@ -1,5 +1,8 @@
 package nadav.tasher.frc.simulator;
 
+import nadav.tasher.frc.simulator.utils.Utils;
+import nadav.tasher.frc.simulator.utils.views.MainScreen;
+
 import javax.swing.*;
 
 public class Main {
@@ -29,7 +32,7 @@ public class Main {
         mainFrame = new JFrame(programName + " " + programVersion);
         mainFrame.setUndecorated(true);
         mainFrame.setExtendedState(JFrame.MAXIMIZED_BOTH);
-        mainFrame.setContentPane(new SimulationGUI());
+        mainFrame.setContentPane(new MainScreen());
         mainFrame.setVisible(true);
     }
 }

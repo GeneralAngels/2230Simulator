@@ -1,14 +1,16 @@
 package nadav.tasher.frc.simulator.simulation.challenges.challenge2018;
 
-import nadav.tasher.frc.simulator.simulation.Coordinates;
 import nadav.tasher.frc.simulator.simulation.challenges.challenge2018.obstacles.CubeDropoff;
 import nadav.tasher.frc.simulator.simulation.challenges.challenge2018.obstacles.CubePickup;
 import nadav.tasher.frc.simulator.simulation.challenges.challenge2018.obstacles.GateChecker;
 import nadav.tasher.frc.simulator.simulation.challenges.challenge2018.robots.Drako;
+import nadav.tasher.frc.simulator.simulation.simulation.Challenge;
+import nadav.tasher.frc.simulator.simulation.simulation.Coordinates;
 
 import java.awt.*;
 
-public class Mat extends nadav.tasher.frc.simulator.simulation.Mat {
+@Challenge(name = "2018 Challenge")
+public class Mat extends nadav.tasher.frc.simulator.simulation.simulation.Mat {
     private int scoreRed = 0;
     private int scoreBlue = 0;
 

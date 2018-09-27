@@ -1,6 +1,6 @@
-package nadav.tasher.frc.simulator.simulation;
+package nadav.tasher.frc.simulator.simulation.simulation;
 
-import nadav.tasher.frc.simulator.simulation.entities.robots.DynamicRobot;
+import nadav.tasher.frc.simulator.simulation.simulation.entities.robots.DynamicRobot;
 import net.java.games.input.Component;
 import net.java.games.input.Controller;
 import net.java.games.input.ControllerEnvironment;

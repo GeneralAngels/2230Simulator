@@ -1,7 +1,7 @@
-package nadav.tasher.frc.simulator.simulation.entities.obstacles;
+package nadav.tasher.frc.simulator.simulation.simulation.entities.obstacles;
 
-import nadav.tasher.frc.simulator.simulation.Coordinates;
-import nadav.tasher.frc.simulator.simulation.Mat;
+import nadav.tasher.frc.simulator.simulation.simulation.Coordinates;
+import nadav.tasher.frc.simulator.simulation.simulation.Mat;
 
 import java.awt.*;
 

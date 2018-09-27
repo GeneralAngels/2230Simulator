@@ -1,4 +1,4 @@
-package nadav.tasher.frc.simulator;
+package nadav.tasher.frc.simulator.utils;
 
 import javax.swing.*;
 import java.awt.*;

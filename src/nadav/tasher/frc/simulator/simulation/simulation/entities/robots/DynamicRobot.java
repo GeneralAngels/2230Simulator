@@ -1,8 +1,8 @@
-package nadav.tasher.frc.simulator.simulation.entities.robots;
+package nadav.tasher.frc.simulator.simulation.simulation.entities.robots;
 
-import nadav.tasher.frc.simulator.simulation.Coordinates;
-import nadav.tasher.frc.simulator.simulation.Mat;
-import nadav.tasher.frc.simulator.simulation.entities.Robot;
+import nadav.tasher.frc.simulator.simulation.simulation.Coordinates;
+import nadav.tasher.frc.simulator.simulation.simulation.Mat;
+import nadav.tasher.frc.simulator.simulation.simulation.entities.Robot;
 import net.java.games.input.Component;
 
 public class DynamicRobot extends Robot {

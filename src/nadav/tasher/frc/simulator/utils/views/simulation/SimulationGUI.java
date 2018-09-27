@@ -1,15 +1,16 @@
-package nadav.tasher.frc.simulator;
+package nadav.tasher.frc.simulator.utils.views.simulation;
 
-import nadav.tasher.frc.simulator.simulation.Simulation;
-import nadav.tasher.frc.simulator.simulation.challenges.challenge2018.Mat;
-import nadav.tasher.frc.simulator.simulation.entities.robots.DynamicRobot;
+import nadav.tasher.frc.simulator.simulation.simulation.Mat;
+import nadav.tasher.frc.simulator.simulation.simulation.Simulation;
+import nadav.tasher.frc.simulator.simulation.simulation.entities.robots.DynamicRobot;
+import nadav.tasher.frc.simulator.utils.views.TextView;
 
 import javax.swing.*;
 import java.awt.*;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import static nadav.tasher.frc.simulator.Utils.y;
+import static nadav.tasher.frc.simulator.utils.Utils.y;
 
 public class SimulationGUI extends JPanel {
     private static final int simulationRate = 60;
@@ -18,14 +19,14 @@ public class SimulationGUI extends JPanel {
     private TextView info = new TextView();
     private Timer infoUpdater = new Timer();
 
-    public SimulationGUI() {
-        init();
+    public SimulationGUI(Mat mat) {
+        init(mat);
     }
 
-    private void init() {
+    private void init(Mat mat) {
         setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
         setBackground(Color.DARK_GRAY);
-        currentSimulation = new Simulation(new Mat(), simulationRate);
+        currentSimulation = new Simulation(mat, simulationRate);
         simulationView = new SimulationView(new Dimension(y(), y()), currentSimulation, 50);
         add(simulationView);
         add(info);
@@ -53,47 +54,5 @@ public class SimulationGUI extends JPanel {
                 info.setText(stringBuilder.toString());
             }
         }, 0, 1000 / 10);
-    }
-
-    public static class SimulationView extends JPanel {
-        private Simulation simulation;
-        private boolean draw = true;
-
-        public SimulationView(Dimension size, Simulation simulation, int refreshRate) {
-            this.simulation = simulation;
-            int height = size.height;
-            int width = height * simulation.getMat().getWidth() / simulation.getMat().getHeight();
-            size = new Dimension(width, height);
-            setPreferredSize(size);
-            setMaximumSize(size);
-            setMaximumSize(size);
-            setSize(size);
-            setBackground(new Color(20, 20, 20));
-            new Timer().scheduleAtFixedRate(new TimerTask() {
-                @Override
-                public void run() {
-                    if (draw)
-                        repaint();
-                }
-            }, 0, 1000 / refreshRate);
-        }
-
-        public void setDraw(boolean draw) {
-            this.draw = draw;
-        }
-
-        public Simulation getSimulation() {
-            return simulation;
-        }
-
-        public void setSimulation(Simulation simulation) {
-            this.simulation = simulation;
-        }
-
-        @Override
-        public void paintComponent(Graphics g) {
-            super.paintComponent(g);
-            simulation.getMat().draw(g);
-        }
     }
 }

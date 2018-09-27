@@ -1,4 +1,4 @@
-package nadav.tasher.frc.simulator.simulation;
+package nadav.tasher.frc.simulator.simulation.simulation;
 
 public class Coordinates {
     private double x, y;

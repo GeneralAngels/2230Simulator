@@ -1,4 +1,4 @@
-package nadav.tasher.frc.simulator.parts;
+package nadav.tasher.frc.simulator.utils.parts;
 
 import java.util.ArrayList;
 

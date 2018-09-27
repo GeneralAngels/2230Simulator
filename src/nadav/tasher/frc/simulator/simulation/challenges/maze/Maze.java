@@ -1,22 +1,24 @@
 package nadav.tasher.frc.simulator.simulation.challenges.maze;
 
-import nadav.tasher.frc.simulator.Utils;
-import nadav.tasher.frc.simulator.simulation.Coordinates;
-import nadav.tasher.frc.simulator.simulation.entities.obstacles.Block;
-import nadav.tasher.frc.simulator.simulation.entities.obstacles.DoBlock;
-import nadav.tasher.frc.simulator.simulation.entities.obstacles.Portal;
-import nadav.tasher.frc.simulator.simulation.entities.robots.DynamicRobot;
+import nadav.tasher.frc.simulator.simulation.simulation.Challenge;
+import nadav.tasher.frc.simulator.simulation.simulation.Coordinates;
+import nadav.tasher.frc.simulator.simulation.simulation.entities.obstacles.Block;
+import nadav.tasher.frc.simulator.simulation.simulation.entities.obstacles.DoBlock;
+import nadav.tasher.frc.simulator.simulation.simulation.entities.obstacles.Portal;
+import nadav.tasher.frc.simulator.simulation.simulation.entities.robots.DynamicRobot;
+import nadav.tasher.frc.simulator.utils.Utils;
 
 import java.awt.*;
 
 public class Maze {
     public static class Robot extends DynamicRobot {
-        protected Robot(nadav.tasher.frc.simulator.simulation.Mat mat) {
+        protected Robot(nadav.tasher.frc.simulator.simulation.simulation.Mat mat) {
             super(mat);
         }
     }
 
-    public static class Mat extends nadav.tasher.frc.simulator.simulation.Mat {
+    @Challenge(name = "Maze #1")
+    public static class Mat extends nadav.tasher.frc.simulator.simulation.simulation.Mat {
         public Mat() {
             super(30, 20);
             Block b1 = new Block(this);

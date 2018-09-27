@@ -1,7 +1,7 @@
 package nadav.tasher.frc.simulator.simulation.challenges.challenge2018;
 
-import nadav.tasher.frc.simulator.simulation.Coordinates;
-import nadav.tasher.frc.simulator.simulation.entities.robots.DynamicRobot;
+import nadav.tasher.frc.simulator.simulation.simulation.Coordinates;
+import nadav.tasher.frc.simulator.simulation.simulation.entities.robots.DynamicRobot;
 
 import java.awt.*;
 import java.awt.geom.AffineTransform;
