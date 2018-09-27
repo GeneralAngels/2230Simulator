@@ -81,13 +81,11 @@ public class Entity extends Nameable {
         graphics.fill(path);
     }
 
-    protected Coordinates collision(Entity collision, Coordinates requested) {
+    protected static Coordinates slidingCollision(Entity self, Entity collision, Coordinates requested) {
         double nX = requested.getX();
         double nY = requested.getY();
-        double startX = getCoordinates().getX() - collision.getWidth(), endX = startX + getWidth() + collision.getWidth();
-        double startY = getCoordinates().getY() - collision.getHeight(), endY = startY + getHeight() + collision.getHeight();
-//        nY = (nX >= startX && nX <= endX) ? find(nY, startY, endY) : nY;
-//        nX = (nY >= startY && nY <= endY) ? find(nX, startX, endX) : nX;
+        double startX = self.getCoordinates().getX() - collision.getWidth(), endX = startX + self.getWidth() + collision.getWidth();
+        double startY = self.getCoordinates().getY() - collision.getHeight(), endY = startY + self.getHeight() + collision.getHeight();
         boolean l = nX < startX + collision.getWidth() / 2;
         boolean r = nX >= endX - collision.getWidth() / 2;
         boolean t = nY < startY + collision.getHeight() / 2;
@@ -97,6 +95,10 @@ public class Entity extends Nameable {
         if (t) return new Coordinates(nX, startY);
         if (b) return new Coordinates(nX, endY);
         return null;
+    }
+
+    protected Coordinates collision(Entity collision, Coordinates requested) {
+        return slidingCollision(this, collision, requested);
     }
 
     protected Coordinates matToPixels(Graphics2D graphics, Coordinates coordinates) {

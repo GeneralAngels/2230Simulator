@@ -33,6 +33,9 @@ public class MainScreen extends JPanel {
         for (Mat challenge : Challenges.challenges) {
             if (challenge.getClass().isAnnotationPresent(Challenge.class)) {
                 JButton challengeButton = new JButton(challenge.getClass().getAnnotation(Challenge.class).name());
+                challengeButton.setOpaque(true);
+                challengeButton.setFont(challengeButton.getFont().deriveFont(32f));
+                challengeButton.setBackground(Color.DARK_GRAY);
                 challengeButton.addActionListener(new AbstractAction() {
                     @Override
                     public void actionPerformed(ActionEvent actionEvent) {
