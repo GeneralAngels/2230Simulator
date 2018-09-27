@@ -22,13 +22,14 @@ public class DynamicRobot extends Robot {
         super.simulate(elapsedTime);
     }
 
+    @Override
     public void handleComponent(Component component) {
         double value = component.getPollData();
-        if (component.getName().equals("x")) {
+        if (component.getIdentifier() == Component.Identifier.Axis.X) {
             setAngle(bound(getAngle() + value / 100));
-        } else if (component.getName().equals("y")) {
-            speed = -value / 10;
-        } else if (component.getName().equals("z")) {
+        } else if (component.getIdentifier() == Component.Identifier.Axis.Y) {
+            speed = value / 10;
+        } else if (component.getIdentifier() == Component.Identifier.Axis.Z) {
         }
     }
 

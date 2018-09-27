@@ -5,6 +5,7 @@ import net.java.games.input.Component;
 import net.java.games.input.Controller;
 import net.java.games.input.ControllerEnvironment;
 
+import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -49,11 +50,54 @@ public class Simulation {
     }
 
     private void handleInputs() {
-        for (Controller controller : ControllerEnvironment.getDefaultEnvironment().getControllers()) {
-            controller.poll();
-            for (Component component : controller.getComponents()) {
-                for (DynamicRobot r : mat.getRobots()) r.handleComponent(component);
+        Controller[] controllers = ControllerEnvironment.getDefaultEnvironment().getControllers();
+        ArrayList<DynamicRobot> robots = mat.getRobots();
+        for (int controller = 0; controller < controllers.length; controller++) {
+            controllers[controller].poll();
+            if (controller < robots.size()) {
+                for (Component component : controllers[controller].getComponents()) {
+                    if (controllers[controller].getType() == Controller.Type.STICK) {
+                        if (component.getIdentifier() == Component.Identifier.Axis.Y) {
+                            component = invertData(component);
+                        }
+                    }
+                    robots.get(controller).handleComponent(component);
+                }
             }
         }
+    }
+
+    private Component invertData(Component finalComponent) {
+        return new Component() {
+            @Override
+            public Identifier getIdentifier() {
+                return finalComponent.getIdentifier();
+            }
+
+            @Override
+            public boolean isRelative() {
+                return finalComponent.isRelative();
+            }
+
+            @Override
+            public boolean isAnalog() {
+                return finalComponent.isAnalog();
+            }
+
+            @Override
+            public float getDeadZone() {
+                return finalComponent.getDeadZone();
+            }
+
+            @Override
+            public float getPollData() {
+                return -finalComponent.getPollData();
+            }
+
+            @Override
+            public String getName() {
+                return finalComponent.getName();
+            }
+        };
     }
 }

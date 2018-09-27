@@ -16,6 +16,12 @@ public class Robot extends DynamicRobot {
         setTeamColor(teamColor);
     }
 
+    protected Robot(Mat mat, Color teamColor, Coordinates initial) {
+        super(mat);
+        setTeamColor(teamColor);
+        setCoordinates(initial);
+    }
+
     public Color getTeamColor() {
         return teamColor;
     }

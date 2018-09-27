@@ -43,14 +43,14 @@ public class SimulationGUI extends JPanel {
                     stringBuilder.append(robot.getName());
                     stringBuilder.append("<br/>");
                     stringBuilder.append("V ");
-                    stringBuilder.append((int) (robot.getSpeed() * simulationRate));
+                    stringBuilder.append((int) Math.abs(robot.getSpeed() * simulationRate));
                     stringBuilder.append(" m/s");
                     stringBuilder.append("<br/>");
                     stringBuilder.append(robot.getStatus().replaceAll("\n", "<br/>"));
                     stringBuilder.append("</p>");
                     stringBuilder.append("<br/>");
                 }
-                stringBuilder.append("<p style=\"color: #FFFFFF\">" + currentSimulation.getMat().getStatus() + "</p>");
+                stringBuilder.append("<p style=\"color: #FFFFFF\">" + currentSimulation.getMat().getStatus().replaceAll("\n", "<br/>") + "</p>");
                 info.setText(stringBuilder.toString());
             }
         }, 0, 1000 / 10);

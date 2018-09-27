@@ -13,6 +13,8 @@ import java.awt.*;
 public class Mat extends nadav.tasher.frc.simulator.simulation.simulation.Mat {
     private int scoreRed = 0;
     private int scoreBlue = 0;
+    private static final Coordinates blueSpawn = new Coordinates(0.5, 10);
+    private static final Coordinates redSpawn = new Coordinates(28.5, 10);
 
     public Mat() {
         super(30, 20);
@@ -42,7 +44,10 @@ public class Mat extends nadav.tasher.frc.simulator.simulation.simulation.Mat {
         addObstacle(redPickup);
         addObstacle(bluePickup);
         addObstacle(dropoff);
-        addRobot(new Drako(this, Color.BLUE));
+        Drako red = new Drako(this, Color.RED, redSpawn);
+        Drako blue = new Drako(this, Color.BLUE, blueSpawn);
+        addRobot(red);
+        addRobot(blue);
     }
 
     public void addRed(int toAdd) {
