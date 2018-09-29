@@ -4,8 +4,8 @@ import nadav.tasher.simulator.simulation.simulation.Entity;
 import nadav.tasher.simulator.simulation.simulation.Mat;
 import net.java.games.input.Component;
 
-public class Robot extends Entity {
-    protected Robot(Mat mat) {
+public class Player extends Entity {
+    protected Player(Mat mat) {
         super(mat);
     }
 

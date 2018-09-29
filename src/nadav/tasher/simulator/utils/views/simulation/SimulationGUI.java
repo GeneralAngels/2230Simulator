@@ -2,7 +2,7 @@ package nadav.tasher.simulator.utils.views.simulation;
 
 import nadav.tasher.simulator.simulation.simulation.Mat;
 import nadav.tasher.simulator.simulation.simulation.Simulation;
-import nadav.tasher.simulator.simulation.simulation.entities.robots.DynamicRobot;
+import nadav.tasher.simulator.simulation.simulation.entities.players.DynamicPlayer;
 import nadav.tasher.simulator.utils.views.TextView;
 
 import javax.swing.*;
@@ -38,7 +38,7 @@ public class SimulationGUI extends JPanel {
             @Override
             public void run() {
                 StringBuilder stringBuilder = new StringBuilder();
-                for (DynamicRobot robot : currentSimulation.getMat().getRobots()) {
+                for (DynamicPlayer robot : currentSimulation.getMat().getRobots()) {
                     stringBuilder.append("<p style=\"color: #" + Integer.toHexString(robot.getColor().getRGB()).substring(2) + ";\">");
                     stringBuilder.append(robot.getName());
                     stringBuilder.append("<br/>");

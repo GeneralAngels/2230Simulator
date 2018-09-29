@@ -1,8 +1,8 @@
 package nadav.tasher.simulator.simulation.simulation;
 
 import nadav.tasher.simulator.simulation.simulation.entities.Obstacle;
-import nadav.tasher.simulator.simulation.simulation.entities.Robot;
-import nadav.tasher.simulator.simulation.simulation.entities.robots.DynamicRobot;
+import nadav.tasher.simulator.simulation.simulation.entities.Player;
+import nadav.tasher.simulator.simulation.simulation.entities.players.DynamicPlayer;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -10,7 +10,7 @@ import java.util.ArrayList;
 public class Mat {
     private int width = 100, height = 100;
     private ArrayList<Obstacle> obstacles = new ArrayList<>();
-    private ArrayList<DynamicRobot> robots = new ArrayList<>();
+    private ArrayList<DynamicPlayer> robots = new ArrayList<>();
 
     public Mat() {
     }
@@ -27,7 +27,7 @@ public class Mat {
         return entities;
     }
 
-    public void addRobot(DynamicRobot robot) {
+    public void addRobot(DynamicPlayer robot) {
         robots.add(robot);
     }
 
@@ -73,7 +73,7 @@ public class Mat {
         for (Obstacle o : obstacles) {
             o.draw(graphics2d);
         }
-        for (Robot r : robots) {
+        for (Player r : robots) {
             r.draw(graphics2d);
         }
     }
@@ -94,7 +94,7 @@ public class Mat {
         this.height = height;
     }
 
-    public ArrayList<DynamicRobot> getRobots() {
+    public ArrayList<DynamicPlayer> getRobots() {
         return robots;
     }
 

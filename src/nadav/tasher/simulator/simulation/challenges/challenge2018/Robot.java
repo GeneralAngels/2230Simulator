@@ -1,13 +1,13 @@
 package nadav.tasher.simulator.simulation.challenges.challenge2018;
 
 import nadav.tasher.simulator.simulation.simulation.Coordinates;
-import nadav.tasher.simulator.simulation.simulation.entities.robots.DynamicRobot;
+import nadav.tasher.simulator.simulation.simulation.entities.players.DynamicPlayer;
 
 import java.awt.*;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Path2D;
 
-public class Robot extends DynamicRobot {
+public class Robot extends DynamicPlayer {
     private boolean hasCube = false;
     private Color teamColor = Color.BLUE;
 

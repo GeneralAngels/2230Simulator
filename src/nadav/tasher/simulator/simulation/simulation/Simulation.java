@@ -1,6 +1,6 @@
 package nadav.tasher.simulator.simulation.simulation;
 
-import nadav.tasher.simulator.simulation.simulation.entities.robots.DynamicRobot;
+import nadav.tasher.simulator.simulation.simulation.entities.players.DynamicPlayer;
 import net.java.games.input.Component;
 import net.java.games.input.Controller;
 import net.java.games.input.ControllerEnvironment;
@@ -51,7 +51,7 @@ public class Simulation {
 
     private void handleInputs() {
         Controller[] controllers = ControllerEnvironment.getDefaultEnvironment().getControllers();
-        ArrayList<DynamicRobot> robots = mat.getRobots();
+        ArrayList<DynamicPlayer> robots = mat.getRobots();
         for (int controller = 0; controller < controllers.length; controller++) {
             controllers[controller].poll();
             if (controller < robots.size()) {
